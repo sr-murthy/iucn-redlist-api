@@ -61,7 +61,7 @@ user = [
 
 [project.urls]
   Homepage = "https://github.com/sr-murthy/iucn-redlist-api"
-  Documentation = "https://github.com/sr-murthy/iucn-redlist-api"
+  Documentation = "https://iucn-redlist-api.readthedocs.io/en/latest/"
   Repository = "https://github.com/sr-murthy/iucn-redlist-api"
 
 [tool.hatch.version]

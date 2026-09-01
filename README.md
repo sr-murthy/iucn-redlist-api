@@ -16,5 +16,7 @@ The IUCN Red List is a comprehensive global source of information on the extinct
 
 The latest version of the API is **v4**, and the reference is published [here](https://api.iucnredlist.org/api-docs/index.html). Using the API requires an API key that can be obtained by registering on the [API portal](https://api.iucnredlist.org/).
 
+There is [API client documentation](https://iucn-redlist-api.readthedocs.io/en/latest/), including an [API client reference](https://iucn-redlist-api.readthedocs.io/en/latest/api-client-reference/).
+
 > [!Note]
 This library is not officially associated with the IUCN in any way, but the implementation faithfully follows the published API reference, and will be maintained in accordance with any changes in the API. Contributors and contributions are welcome.
