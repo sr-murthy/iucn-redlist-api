@@ -1,4 +1,4 @@
-# API Reference
+# API Client Reference
 
 ::: iucn_redlist_api.api.IucnRedListApiClient
     options:
