@@ -12,7 +12,7 @@
 
 `iucn-redlist-api` is a Python client library for the [International Union for Conservation of Nature and Natural Resources (IUCN)](https://iucn.org/) [Red List of Threatened Species](https://www.iucnredlist.org/) [API](https://api.iucnredlist.org/). The API is commonly abbreviated as the Red List API.
 
-The IUCN Red List is a comprehensive global source of information on the extinction risk status of animals and on natural biodiversity.
+The IUCN Red List is a comprehensive global source of information on the extinction risk status of animals and animal biodiversity.
 
 The latest version of the API is **v4**, and the reference is published [here](https://api.iucnredlist.org/api-docs/index.html). Using the API requires an API key that can be obtained by registering on the [API portal](https://api.iucnredlist.org/).
 
