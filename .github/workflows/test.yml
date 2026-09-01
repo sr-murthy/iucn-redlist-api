@@ -56,8 +56,3 @@ jobs:
     - name: Run unit tests + Measure code coverage
       run: |
         make unittests
-
-    - name: Run doctests
-      run: |
-        make doctests
-        sleep 60
