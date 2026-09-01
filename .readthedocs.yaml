@@ -1,0 +1,17 @@
+# Read the Docs configuration file for MkDocs projects
+# See https://docs.readthedocs.io/en/stable/config-file/v2.html for details
+
+# Required
+version: 2
+
+# Set the version of Python and other tools you might need
+build:
+  os: ubuntu-lts-latest
+  tools:
+    python: "3.12"
+  commands:
+    - python3 -m pip install uv
+    - uv sync --verbose --active --all-groups --no-install-project --no-cache --refresh --exact
+    - uv run zensical build --clean
+    - mkdir -p _readthedocs
+    - cp -r site/ _readthedocs/html/

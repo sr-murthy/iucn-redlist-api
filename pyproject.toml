@@ -1,0 +1,143 @@
+[project]
+
+  name = "iucn-redlist-api"
+  description = "Python client for the IUCN Red List of Threatened Species API"
+
+  authors = [
+      {name = "Sandeep R. Murthy", email = "srm@tuta.com"},
+  ]
+
+  maintainers = [
+    {name = "Sandeep R. Murthy", email = "srm@tuta.com"}
+  ]
+
+  dynamic = ["version"]
+
+  requires-python = ">=3.12"
+
+  license = {file = "LICENSE"}
+
+  dependencies = [
+      "requests",
+  ]
+
+  readme = "README.md"
+
+  keywords = [
+      "international union for conservation of nature and natural resources",
+      "iucn",
+      "python",
+      "python3",
+      "red list of threatened species",
+      "red list api",
+      "red list",
+  ]
+
+  classifiers = [
+          "Environment :: Console",
+          "Programming Language :: Python :: 3",
+          "Programming Language :: Python :: 3.12",
+          "Programming Language :: Python :: 3.13",
+          "Programming Language :: Python :: 3.14",
+          "Development Status :: 5 - Production/Stable",
+          "Operating System :: POSIX :: Linux",
+          "Operating System :: MacOS",
+          "Operating System :: Microsoft :: Windows",
+  ]
+
+[project.optional-dependencies]
+docs = [
+    "zensical",
+    "mkdocstrings[python]",
+]
+
+user = [
+    "jupyter",
+]
+
+[build-system]
+  requires = ["hatchling", "uv-dynamic-versioning"]
+  build-backend = "hatchling.build"
+
+[project.urls]
+  Homepage = "https://github.com/sr-murthy/iucn-redlist-api"
+  Documentation = "https://github.com/sr-murthy/iucn-redlist-api"
+  Repository = "https://github.com/sr-murthy/iucn-redlist-api"
+
+[tool.hatch.version]
+  source = "uv-dynamic-versioning"
+
+[tool.hatch.build.targets.wheel]
+  packages = ["src/iucn_redlist_api"]
+
+[dependency-groups]
+  build = [
+      "hatchling",
+  ]
+  docs = [
+      "zensical",
+      "mkdocstrings[python]",
+  ]
+  dev = [
+      "pre-commit",
+      "pytest",
+      "pytest-cov",
+      "coverage",
+      "ipython",
+      "ipdb",
+      "virtualenv",
+  ]
+  test = [
+      "coverage[toml]",
+      "pytest",
+      "pytest-cov",
+  ]
+
+[tool.uv]
+  default-groups = "all"
+
+[tool.pytest.ini_options]
+  pythonpath = "src"
+  addopts = """\
+      --cache-clear \
+      --code-highlight=yes \
+      --color=yes \
+      --cov=src \
+      --cov-config=pyproject.toml \
+      --cov-report=xml \
+      --cov-report=html \
+      -ra \
+      --tb=native \
+      --verbosity=3 \
+  """
+  filterwarnings = [
+      "ignore::DeprecationWarning"
+  ]
+  python_files = ["test_*.py",]
+  python_classes = ["Test",]
+  python_functions = ["test"]
+  testpaths = [
+      "tests/",
+  ]
+
+[tool.coverage.run]
+  branch = true
+  omit = [
+      "./build",
+      "./dist",
+      "./docs",
+      "*/tests*",
+      ".pytest_cache",
+      "*.pyc",
+      "*.env",
+      "*__pycache__*",
+      "__version__.py"
+  ]
+  source = ["src"]
+
+[tool.coverage.report]
+  precision = 3
+  show_missing = true
+  skip_covered = true
+  skip_empty = true
+  sort = "Name"

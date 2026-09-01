@@ -1,0 +1,25 @@
+name: pre-commit
+
+on:
+  push:
+    branches: main
+  pull_request:
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install pre-commit & run pre-commit hooks
+        run: |
+          python3 -m pip install pre-commit
+          pre-commit run --all-files
