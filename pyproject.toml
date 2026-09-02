@@ -47,20 +47,23 @@
 
 [project.optional-dependencies]
 
-[build-system]
-  requires = ["hatchling", "uv-dynamic-versioning"]
-  build-backend = "hatchling.build"
-
 [project.urls]
   Homepage = "https://github.com/sr-murthy/iucn-redlist-api"
   Documentation = "https://iucn-redlist-api.readthedocs.io/en/latest/"
   Repository = "https://github.com/sr-murthy/iucn-redlist-api"
 
+[build-system]
+  requires = ["hatchling", "uv-dynamic-versioning"]
+  build-backend = "hatchling.build"
+
 [tool.hatch.version]
-  source = "uv-dynamic-versioning"
+  path = "src/iucn_redlist_api/__init__.py"
+
+[tool.hatch.build.targets.sdist]
+  packages = ["src/iucn_redlist_api",]
 
 [tool.hatch.build.targets.wheel]
-  packages = ["src/iucn_redlist_api"]
+  packages = ["src/iucn_redlist_api",]
 
 [dependency-groups]
   build = [
