@@ -10,21 +10,11 @@ The requirements and installation process are fairly simple, and are described b
 
 ## Installation / Setup
 
-There is currently no public Python `iucn-redlist-api` package, so for the moment the best starting point is a clone of the [original repository](https://github.com/sr-murthy/iucn-redlist-api), or a clone of your own GitHub fork of the original.
+### Standard PyPI Installation
 
-From the cloned repository there are several options for using it as an importable package/library.
-
-### Non-Editable Installation
-
-Install the project as a regular library, from the project root, with either `pip`:
-
+Install with:
 ```shell
-python3 -m pip install .
-```
-or with `uv`:
-
-```shell
-uv run --verbose --active pip install .
+python3 -m pip install iucn-redlist-api
 ```
 
 Now import `iucn_redlist_api` in a Python shell of your choice, and instantiate the client with the API key:
@@ -42,7 +32,21 @@ IucnRedListApiClient(api_version="v4")
 
 All Red List API requests are handled via the [`IucnRedListApiSession`][iucn_redlist_api.api.IucnRedListApiSession] object on the client, and all requests are `GET` requests. All responses are [`IucnRedListApiResponse`][iucn_redlist_api.api.IucnRedListApiResponse] objects, with response data available in JSON from the [`json`][iucn_redlist_api.api.IucnRedListApiResponse.json] attribute. Consult the [API Reference][api-client-reference] for more information.
 
-In both cases, all package dependencies (at the moment, just the [`requests`][requests] library) and development dependencies, as defined in the [project TOML](https://github.com/sr-murthy/iucn-redlist-api/blob/main/pyproject.toml), will be installed into the working environment **in addition to** the project itself, which will also be installed as an importable library, `iucn_redlist_api`.
+
+### Non-Editable Installation
+
+If you have the project locally, via a clone, you can install the library in non-editable mode with either `pip`:
+
+```shell
+python3 -m pip install .
+```
+or `uv`:
+
+```shell
+uv sync --active --verbose --all-groups --no-cache --refresh --inexact
+```
+
+In both cases, all package dependencies (at the moment, just the [`requests`][requests] library) and development dependencies, as defined in the [project TOML](https://github.com/sr-murthy/iucn-redlist-api/blob/main/pyproject.toml), will be installed into the working environment, **in addition to** the project itself, which will also be installed as an importable library, `iucn_redlist_api`.
 
 !!! note
     `uv` by default installs and manages all dependencies in a hidden subfolder named `.venv` located in the working directory where it was installed. This may cause problems if you already have a different (e.g. pre-existing or working) environment you wish to use: in this case, either export the path to the preferred environment via the [`UV_PROJECT_ENVIRONMENT`](https://docs.astral.sh/uv/reference/environment/#uv_project_environment) environment variable, or use the `--active` flag to target the active environment.
