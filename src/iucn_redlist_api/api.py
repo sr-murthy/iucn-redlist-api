@@ -272,7 +272,7 @@ class IucnRedListApiClient:
         Raises
         ------
         IucnRedListApiRequestException
-            If there was a [requests.RequestException][] in making the original
+            If there was a [`requests.RequestException`][requests.RequestException] in making the original
             request.
 
         Examples
@@ -3476,7 +3476,7 @@ class IucnRedListApiResponse(requests.models.Response):
     __attrs__ = Response.__attrs__
 
     def __init__(self, response: requests.Response) -> None:
-        """Initialiser requiring a [requests.Response][] object.
+        """Initialiser requiring a [`requests.Response`][requests.Response] object.
 
         Parameters
         ----------
