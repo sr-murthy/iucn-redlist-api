@@ -42,7 +42,7 @@ version_extract:
 sync_deps_exact:
 	@echo "\n$(PACKAGE_NAME)[$(BRANCH)@$(HEAD)]: Syncing all package + development dependencies, exactly in line with the UV lockfile\n"
 	rm -f uv.lock && \
-	uv sync --verbose --active --all-groups --no-install-project --no-cache --refresh --exact
+	uv sync --verbose --active --all-groups --no-install-project --no-cache --refresh
 
 sync_deps_inexact:
 	@echo "\n$(PACKAGE_NAME)[$(BRANCH)@$(HEAD)]: Syncing all package + development dependencies, preserving pre-existing dependencies\n"
@@ -61,14 +61,14 @@ doctests: clean
 
 unittests: clean
 	@echo "\n$(PACKAGE_NAME)[$(BRANCH)@$(HEAD)]: Running package unit tests + measuring coverage\n"
-	PYTHONPATH="src" uv run --active python3 -m pytest \
-						                         --cache-clear \
-							                     --capture=no \
-							                     --code-highlight=yes \
-							                     --color=yes \
-							                     --cov=src \
-							                     --cov-report=term-missing:skip-covered \
-							                     -ra \
-							                     --tb=native \
-							                     --verbosity=3 \
-							                    tests/units
+	PYTHONPATH="src" uv run --active pytest \
+			                         --cache-clear \
+				                     --capture=no \
+				                     --code-highlight=yes \
+				                     --color=yes \
+				                     --cov=src \
+				                     --cov-report=term-missing:skip-covered \
+				                     -ra \
+				                     --tb=native \
+				                     --verbosity=3 \
+				                    tests/units
