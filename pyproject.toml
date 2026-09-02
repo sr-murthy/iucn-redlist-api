@@ -46,14 +46,6 @@
   ]
 
 [project.optional-dependencies]
-docs = [
-    "zensical",
-    "mkdocstrings[python]",
-]
-
-user = [
-    "jupyter",
-]
 
 [build-system]
   requires = ["hatchling", "uv-dynamic-versioning"]

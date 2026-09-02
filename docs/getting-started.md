@@ -40,7 +40,7 @@ IucnRedListApiClient(api_version="v4")
 {'red_list_version': '2026-1'}
 ```
 
-All Red List API requests are handled via the [`IucnRedListApiSession`][iucn_redlist_api.api.IucnRedListApiSession] object on the client, and all requests are `GET` requests. Consult the [API Reference][api-reference] for more information.
+All Red List API requests are handled via the [`IucnRedListApiSession`][iucn_redlist_api.api.IucnRedListApiSession] object on the client, and all requests are `GET` requests. All responses are [`IucnRedListApiResponse`][iucn_redlist_api.api.IucnRedListApiResponse] objects, with response data available in JSON from the [`json`][iucn_redlist_api.api.IucnRedListApiResponse.json] attribute. Consult the [API Reference][api-client-reference] for more information.
 
 In both cases, all package dependencies (at the moment, just the [`requests`][requests] library) and development dependencies, as defined in the [project TOML](https://github.com/sr-murthy/iucn-redlist-api/blob/main/pyproject.toml), will be installed into the working environment **in addition to** the project itself, which will also be installed as an importable library, `iucn_redlist_api`.
 
@@ -58,7 +58,9 @@ or [Astral `uv`](https://docs.astral.sh/uv/):
 uv sync --active --verbose --all-groups --no-cache --refresh --inexact
 ```
 
-In both cases the project will be installed as an editable library, where local changes to the source files (in `src/iucn_redlist_api/`) will be immediately reflected in the installed library functionality. This is the best option if you wish to contribute to the project via pull requests.
+Now import the library in exactly the same way as with the non-editable installation option above.
+
+In the editable installation local changes to the source files (in `src/iucn_redlist_api/`) are reflected in the installed library functionality. This is the best option if you wish to contribute to the project via pull requests.
 
 ### Direct Use from Source
 
@@ -77,6 +79,6 @@ IucnRedListApiClient(api_version="v4")
 
 ## Using the API Client
 
-There is a comprehensive [Red List API reference](https://api.iucnredlist.org/api-docs/index.html) that can be consulted to understand the API itself, and the `iucn-redlist-api` is a very thin client around this API, with a public method for every API endpoint, that is fully documented in the [API client reference](api-client-reference), with example snippets.
+There is a comprehensive [Red List API reference](https://api.iucnredlist.org/api-docs/index.html) that can be consulted to understand the API itself, and the `iucn-redlist-api` is a very thin client around this API, with a public method for every API endpoint. The API client methods are fully documented in the [API client reference](api-client-reference), with example snippets.
 
-So please refer to the client reference for now. A more detailed client usage guide might be added at some point in the future.
+A more detailed client usage guide will be added at some point in the future.
