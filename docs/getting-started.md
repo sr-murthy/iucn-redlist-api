@@ -23,7 +23,7 @@ Now import `iucn_redlist_api` in a Python shell of your choice, and instantiate 
 >>> import os; from iucn_redlist_api.api import *
 >>> client = api.IucnRedListApiClient(os.environ['API_KEY'])
 >>> client
-IucnRedListApiClient(api_version="v4")
+IucnRedListApiClient(api_version="v4", debug_mode=False)
 >>> client.api_version
 {'api_version': 'v4'}
 >>> client.get_information_red_list_version()
@@ -78,7 +78,7 @@ Accessing the client works exactly the same way as described above, except that 
 >>> import importlib, os; import iucn_redlist_api.api; importlib.reload(iucn_redlist_api.api); from iucn_redlist_api.api import *
 >>> client = api.IucnRedListApiClient(os.environ['API_KEY'])
 >>> client
-IucnRedListApiClient(api_version="v4")
+IucnRedListApiClient(api_version="v4", debug=False)
 ```
 
 ## Using the API Client
