@@ -2558,7 +2558,7 @@ class IucnRedListApiResponse(requests.models.Response):
         self.__dict__.update(**response.__dict__)
 
     @property
-    def json(self) -> dict | list[dict]:
+    def json(self) -> dict:
         """The API response data as JSON, if such data exists.
 
         Returns
