@@ -6,6 +6,7 @@
 [![UV](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
 [![Docs](https://readthedocs.org/projects/iucn-redlist-api/badge/?version=latest)](https://iucn-redlist-api.readthedocs.io/en/latest/?badge=latest)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-brightgreen)](https://opensource.org/license/gpl-3.0)
+[![PyPI version](https://img.shields.io/pypi/v/iucn-redlist-api?logo=python&color=41bb13)](https://pypi.org/project/iucn-redlist-api)
 
 </div>
 
