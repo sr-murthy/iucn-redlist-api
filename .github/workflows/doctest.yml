@@ -1,0 +1,28 @@
+name: doctest
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+env:
+  PYTHONDEVMODE: 1
+  API_KEY: ${{ secrets.IUCN_RED_LIST_API_KEY }}
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Run doctests
+        run: |
+          python3 -m pip install pre-commit
+          make doctest

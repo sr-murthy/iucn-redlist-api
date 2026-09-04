@@ -15,9 +15,6 @@ TESTS_ROOT := $(PROJECT_ROOT)/tests
 #DOCS_BUILD := $(DOCS_ROOT)/_build
 #DOCS_BUILD_HTML := $(DOCS_ROOT)/_build/html
 
-# Make everything (possible)
-all:
-
 # Git
 git_stage:
 	@echo "\n$(PACKAGE_NAME)[$(BRANCH)@$(HEAD)]: Staging new, modified, deleted and/or renamed files in Git\n"
@@ -26,6 +23,7 @@ git_stage:
 	git status -uno
 
 # Housekeeping
+.PHONY: clean
 clean:
 	@echo "\n$(PACKAGE_NAME)[$(BRANCH)@$(HEAD)]: Deleting all temporary files\n"
 	rm -fr docs/_build/* .pytest_cache *.pyc *__pycache__* ./dist/* ./build/* *.egg-info*
@@ -50,16 +48,19 @@ sync_deps_inexact:
 	uv sync --verbose --active --all-groups --no-install-project --no-cache --refresh --inexact
 
 # Pre-commit
+.PHONY: pre-commit
 pre-commit: clean
 	@echo "\n$(PACKAGE_NAME)[$(BRANCH)@$(HEAD)]: Running pre-commit hooks\n"
 	pre-commit run --all-files
 
 # Running tests (NOTE: all tests require the API_KEY environment variable)
-doctests: clean
+.PHONY: doctest
+doctest: clean
 	@echo "\n$(PACKAGE_NAME)[$(BRANCH)@$(HEAD)]: Running doctests in all core libraries\n"
 	PYTHONPATH="src" uv run --active python3 -m doctest -v src/iucn_redlist_api/*.py
 
-unittests: clean
+.PHONY: test
+test: clean
 	@echo "\n$(PACKAGE_NAME)[$(BRANCH)@$(HEAD)]: Running package unit tests + measuring coverage\n"
 	PYTHONPATH="src" uv run --active pytest \
 			                         --cache-clear \
