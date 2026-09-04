@@ -27,15 +27,46 @@ class TestIucnRedListApiSession(_TestIucnRedListApi):
 
 
 class TestIucnRedListApiClient(_TestIucnRedListApi):
-    def test_api_client____init__(self):
+    def test_api_client____init_____check_api_key(self):
         test_client = IucnRedListApiClient(self._api_key)
 
         assert test_client.api_session.api_key == self._api_key
+
+    def test_api_client____init_____check_api_session_headers(self):
+        test_client = IucnRedListApiClient(self._api_key)
+
         assert test_client.api_session.headers == {
             "Accept": "application/json",
             "Authorization": self._api_key,
         }
+
+    def test_api_client____init_____check_api_version(self):
+        test_client = IucnRedListApiClient(self._api_key)
+
         assert test_client.api_version == API_CONSTANTS.API_VERSION.value
+
+    def test_api_client____init____no_debug_mode(self):
+        test_client = IucnRedListApiClient(self._api_key)
+
+        assert test_client.debug_mode is False
+        assert test_client._logger.root.handlers == []
+
+    def test_api_client____init____debug_mode(self):
+        test_client = IucnRedListApiClient(self._api_key, debug_mode=True)
+        assert test_client.debug_mode is True
+        assert test_client._logger.root.handlers
+
+    def test_client___toggle_logging__no_debug_mode_initially__set_to_debug_mode(self):
+        test_client = IucnRedListApiClient(self._api_key)
+        assert test_client._logger.root.handlers == []
+        test_client.debug_mode = True
+        assert test_client._logger.root.handlers
+
+    def test_client___toggle_logging__debug_mode_on__turn_off_debug_mode(self):
+        test_client = IucnRedListApiClient(self._api_key, debug_mode=True)
+        assert test_client._logger.root.handlers
+        test_client.debug_mode = False
+        assert test_client._logger.root.handlers == []
 
     def test_api_client__get(self):
         test_client = IucnRedListApiClient(self._api_key)
