@@ -24,4 +24,4 @@ See the [API client documentation](https://iucn-redlist-api.readthedocs.io/en/la
 The [Python package](https://pypi.org/project/iucn-redlist-api/) is currently at `v0.3.0`.
 
 > [!Note]
-This project is not officially associated with the IUCN in any way, but the client implementation faithfully follows the published API reference, and will be maintained in accordance with any changes in the API. Contributors and contributions are welcome.
+This project is not officially associated with the IUCN in any way, but the client implementation faithfully follows the published Red List API reference, and will be maintained in accordance with any changes in the API. Contributors and contributions are welcome.

@@ -66,7 +66,7 @@ Now import the library in exactly the same way as with the non-editable installa
 
 In the editable installation local changes to the source files (in `src/iucn_redlist_api/`) are reflected in the installed library functionality. This is the best option if you wish to contribute to the project via pull requests.
 
-### Direct Use from Source
+### Use from Source
 
 You can also use the client library directly from source in a Python interpreter, with only the project dependencies - not the project itself - installed into the working environment, for example, with `uv` using a variant of the command above with the addition of the `--no-install-project` flag, e.g.:
 ```shell

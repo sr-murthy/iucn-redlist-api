@@ -9,6 +9,6 @@ The latest version of the API is **v4**, and the reference is published <a href=
 The [Python package](https://pypi.org/project/iucn-redlist-api/) is currently at `v0.3.0`.
 
 !!! note
-    This project is not officially associated with the IUCN in any way, but the implementation faithfully follows the published API reference, and will be maintained in accordance with any changes in the API. Contributors and contributions are welcome.
+    This project is not officially associated with the IUCN in any way, but the implementation faithfully follows the published Red List API reference, and will be maintained in accordance with any changes in the API. Contributors and contributions are welcome.
 
 See the [Getting Started](getting-started) guide to get started!
