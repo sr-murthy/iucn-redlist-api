@@ -447,7 +447,7 @@ class IucnRedListApiClient:
         --------
         >>> import os
         >>> client = IucnRedListApiClient(os.environ['API_KEY'])
-        >>> client.assessment_search(filter_on=['eu_27_post_2020_endemic']).json  # doctest: +NORMALIZE_WHITESPACE, +ELLIPSIS
+        >>> client.assessment_search(filter_on=['x']).json  # doctest: +NORMALIZE_WHITESPACE, +ELLIPSIS
         {'assessment_ids': [259841783,
           245042349,
           209243069,
@@ -1967,8 +1967,7 @@ class IucnRedListApiClient:
         year_published: int | None = None,
         latest: bool | None = None,
         possibly_extinct: bool | None = None,
-        possibly_extinct_in_the_wild: bool | None = None,
-        scope_code: int | None = None,
+        possibly_extinct_in_the_wild: bool | None = None
     ) -> IucnRedListApiResponse:
         """Assessment data for a geographical assessment scope by scope code.
 
@@ -2001,10 +2000,6 @@ class IucnRedListApiClient:
 
         possibly_extinct_in_the_wild : bool, default=None
             Optional indicator of species extinction in the wild, defaults to
-            ``None``.
-
-        scope_code : int, default=None
-            Optional indicator of geographic assessment scope code, defaults to
             ``None``.
 
         Returns
@@ -2058,8 +2053,7 @@ class IucnRedListApiClient:
             year_published=year_published,
             latest=latest,
             possibly_extinct=possibly_extinct,
-            possibly_extinct_in_the_wild=possibly_extinct_in_the_wild,
-            scope_code=scope_code,
+            possibly_extinct_in_the_wild=possibly_extinct_in_the_wild
         )
 
         return self.get(endpoint, params=params)

@@ -48,6 +48,9 @@
 
 [project.optional-dependencies]
 
+[project.scripts]
+  redlist-cli = "iucn_redlist_api.cli:redlist_cli"
+
 [project.urls]
   Homepage = "https://github.com/sr-murthy/iucn-redlist-api"
   Documentation = "https://iucn-redlist-api.readthedocs.io/en/latest/"
