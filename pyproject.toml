@@ -18,8 +18,9 @@
   license = {file = "LICENSE"}
 
   dependencies = [
+      "click>=8.5.0",
       "requests",
-  ]
+]
 
   readme = "README.md"
 
