@@ -1,7 +1,7 @@
 [project]
 
   name = "iucn-redlist-api"
-  description = "Python client for the IUCN Red List of Threatened Species API"
+  description = "Python client and CLI for the IUCN Red List of Threatened Species API"
 
   authors = [
       {name = "Sandeep R. Murthy", email = "srm@tuta.com"},
@@ -18,8 +18,9 @@
   license = {file = "LICENSE"}
 
   dependencies = [
+      "click>=8.5.0",
       "requests",
-  ]
+]
 
   readme = "README.md"
 
@@ -46,6 +47,9 @@
   ]
 
 [project.optional-dependencies]
+
+[project.scripts]
+  redlist-cli = "iucn_redlist_api.cli:redlist_cli"
 
 [project.urls]
   Homepage = "https://github.com/sr-murthy/iucn-redlist-api"

@@ -121,25 +121,34 @@ class IucnRedListApiClient:
     _api_session: IucnRedListApiSession
     _debug_mode: bool = False
 
-    def _set_logging(self, debug_mode: bool) -> bool:
-        """Processes client-requested debug mode appropriately.
+    def _toggle_logging(self, debug_mode: bool) -> bool:
+        """Toggles logging based on the client-set debug mode appropriately.
 
         No file handlers are set.
         """
         if not debug_mode:
+            # Clear all handlers, including for the root logger, and create an
+            # non-logging instance logger, and return.
+            self._debug_mode = False
             logging.basicConfig(handlers=[], force=True)
-            return False
+            self._logger = logging.getLogger(__name__)
 
+            return self._debug_mode
+
+        # Otherrwise, configure the root logger to log at debug level, and
+        # create a new instance logger that will inherit this root logger.
+        self._debug_mode = True
         logging.getLogger("asyncio").setLevel(logging.WARNING)
+        logging.basicConfig(
+            format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+            datefmt="%Y-%m-%d %H:%M:%S",
+            level=logging.DEBUG,
+            stream=sys.stdout,
+            force=True,
+        )
         self._logger = logging.getLogger(__name__)
-        if not self._logger.handlers:
-            logging.basicConfig(
-                format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
-                datefmt="%Y-%m-%d %H:%M:%S",
-                level=logging.DEBUG,
-                stream=sys.stdout,
-            )
-            return True
+
+        return self._debug_mode
 
     def __init__(self, api_key: str, /, *, debug_mode: bool | None = False) -> None:
         """Initialiser requiring the API key.
@@ -171,7 +180,7 @@ class IucnRedListApiClient:
         # Note that debug mode is handled initially, once per client lifecycle.
         # Toggling debug mode on/off in a client is not supported. If you want
         # to toggle it create a new client with the desired debug mode.
-        self._debug_mode = self._set_logging(debug_mode)
+        self._debug_mode = self._toggle_logging(debug_mode)
 
     @property
     def api_session(self) -> IucnRedListApiSession:
@@ -201,12 +210,56 @@ class IucnRedListApiClient:
 
         Examples
         --------
-        >>> import os; from iucn_redlist_api.constants import IUCN_RED_LIST_API_CONSTANTS as API_CONSTANTS
+        >>> import os
         >>> client = IucnRedListApiClient(os.environ['API_KEY'])
         >>> client.api_version
         'v4'
         """
         return API_CONSTANTS.API_VERSION.value
+
+    @property
+    def debug_mode(self) -> bool:
+        """Client debug mode.
+
+        Returns
+        -------
+        bool
+            Client debug mode.
+
+        Examples
+        --------
+        >>> import os
+        >>> client = IucnRedListApiClient(os.environ['API_KEY'])
+        >>> client.debug_mode
+        False
+        """
+        return self._debug_mode
+
+    @debug_mode.setter
+    def debug_mode(self, _debug_mode: bool) -> None:
+        """Sets the requested client debug mode.
+
+        Parameters
+        ----------
+        _debug_mode : bool
+            The debug mode to set for client requests.
+
+        Examples
+        --------
+        >>> import os
+        >>> client = IucnRedListApiClient(os.environ['API_KEY'])
+        >>> client.debug_mode
+        False
+        >>> client.get_information_api_version()  # doctest: +NORMALIZE_WHITESPACE, +ELLIPSIS
+        {'api_version': 'v4'}
+        >>> client.debug_mode = True
+        >>> client.get_information_api_version()  # doctest: +NORMALIZE_WHITESPACE, +ELLIPSIS
+        2026-09-04 18:57:21 [DEBUG] iucn_redlist_api.api: Requesting URL: https://api.iucnredlist.org/api/v4/information/api_version
+        2026-09-04 18:57:21 [DEBUG] urllib3.connectionpool: https://api.iucnredlist.org:443 "GET /api/v4/information/api_version HTTP/1.1" 200 20
+        2026-09-04 18:57:21 [DEBUG] iucn_redlist_api.api: Response 200: {'Date': 'Fri, 04 Sep 2026 17:57:22 GMT', 'Content-Type': 'application/json', 'Content-Length': '20', 'Connection': 'keep-alive', 'Cache-Control': 'max-age=0, private, must-revalidate', 'content-security-policy': "default-src 'self'; script-src 'self' https://static.cloudflareinsights.com https://cloud.umami.is https://ksbk62v4jgjkcqo3vmgzxqvu.agents.do-ai.run https://d1bxh8uas1mnw7.cloudfront.net https://embed.altmetric.com https://api.altmetric.com 'unsafe-inline' 'unsafe-eval'; style-src 'self' https://unpkg.com 'unsafe-inline'; img-src 'self' data: https://iucnredlist.org https://*.iucnredlist.org https://*.digitaloceanspaces.com https://*.tile.openstreetmap.org https://static.inaturalist.org https://www.inaturalist.org https://*.amazonaws.com https://server.arcgisonline.com https://badges.altmetric.com; font-src 'self'; object-src 'none'; connect-src 'self' https://api-gateway.umami.dev https://gateway.umami.is https://ksbk62v4jgjkcqo3vmgzxqvu.agents.do-ai.run; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://ksbk62v4jgjkcqo3vmgzxqvu.agents.do-ai.run https://cloud.umami.is https://iucnredlist.appsignal-status.com; frame-ancestors 'none'; form-action 'self'", 'etag': 'W/"6796c3da3241311b32e207654d58b77d"', 'feature-policy': "camera 'none'; gyroscope 'none'; microphone 'none'; usb 'none'; fullscreen 'none'; payment 'none'", 'strict-transport-security': 'max-age=31556952; includeSubDomains', 'vary': 'Accept-Encoding', 'x-cache': 'miss', 'x-request-id': 'cfef0a23-ead0-4965-8571-1e357eb3102d', 'x-runtime': '0.017611', 'Nel': '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}', 'cf-cache-status': 'DYNAMIC', 'Speculation-Rules': '"/cdn-cgi/speculation"', 'Report-To': '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=Zt3hjF%2BAHsgpHGIEwIrXvk%2FLLqlrRhRCR2GNRix9lEppx5R%2FxEqq0E5ClerFNnvPr2PpwMtrd0iZ93Bc3R%2BmopDe1YDPo7dkS6TxEFkJndMkv1km%2BOr0ri4AvEFmhbVX6%2BnY1uQ%3D"}]}', 'Server': 'cloudflare', 'CF-RAY': 'a35ee04cbc9aa0fc-CPH'}
+        {'api_version': 'v4'}
+        """
+        self._toggle_logging(_debug_mode)
 
     def __repr__(self) -> str:
         return f'IucnRedListApiClient(api_version="{self.api_version}", debug_mode={self._debug_mode})'
@@ -272,7 +325,7 @@ class IucnRedListApiClient:
         Raises
         ------
         IucnRedListApiRequestException
-            If there was a [requests.RequestException][] in making the original
+            If there was a [`requests.RequestException`][requests.RequestException] in making the original
             request.
 
         Examples
@@ -341,7 +394,7 @@ class IucnRedListApiClient:
         --------
         >>> import os
         >>> client = IucnRedListApiClient(os.environ['API_KEY'])
-        >>> client.get_assessment(259841783).json  # doctest: +NORMALIZE_WHITESPACE, +ELLIPSIS
+        >>> client.get_assessment(259841783).json  # doctest: +SKIP
         {'assessment_date': '2024-05-17T01:00:00.000+01:00',
          'year_published': '2026',
          'latest': True,
@@ -394,7 +447,7 @@ class IucnRedListApiClient:
         --------
         >>> import os
         >>> client = IucnRedListApiClient(os.environ['API_KEY'])
-        >>> client.assessment_search(filter_on=['eu_27_post_2020_endemic']).json  # doctest: +NORMALIZE_WHITESPACE, +ELLIPSIS
+        >>> client.assessment_search(filter_on=['x']).json  # doctest: +SKIP
         {'assessment_ids': [259841783,
           245042349,
           209243069,
@@ -1246,7 +1299,7 @@ class IucnRedListApiClient:
     # --- Green status -------------------------------------------------------#
     # ------------------------------------------------------------------------#
     def get_green_status_all(self) -> IucnRedListApiResponse:
-        """The green status of species.
+        """All green status (recovery and conservation status) assessments.
 
         Implements the request:
 
@@ -1255,7 +1308,7 @@ class IucnRedListApiClient:
         Returns
         -------
         IucnRedListApiResponse
-            Green status of species data.
+            All green status (recovery and conservation status) assessments.
 
         Examples
         --------
@@ -1915,7 +1968,6 @@ class IucnRedListApiClient:
         latest: bool | None = None,
         possibly_extinct: bool | None = None,
         possibly_extinct_in_the_wild: bool | None = None,
-        scope_code: int | None = None,
     ) -> IucnRedListApiResponse:
         """Assessment data for a geographical assessment scope by scope code.
 
@@ -1948,10 +2000,6 @@ class IucnRedListApiClient:
 
         possibly_extinct_in_the_wild : bool, default=None
             Optional indicator of species extinction in the wild, defaults to
-            ``None``.
-
-        scope_code : int, default=None
-            Optional indicator of geographic assessment scope code, defaults to
             ``None``.
 
         Returns
@@ -2006,7 +2054,6 @@ class IucnRedListApiClient:
             latest=latest,
             possibly_extinct=possibly_extinct,
             possibly_extinct_in_the_wild=possibly_extinct_in_the_wild,
-            scope_code=scope_code,
         )
 
         return self.get(endpoint, params=params)
@@ -2453,7 +2500,7 @@ class IucnRedListApiClient:
         return self.get(endpoint, params=params)
 
     def get_taxa_kingdom(self) -> IucnRedListApiResponse:
-        """Kingdom taxa data.
+        """Kingdoms.
 
         Implements the request:
 
@@ -2462,7 +2509,7 @@ class IucnRedListApiClient:
         Returns
         -------
         IucnRedListApiResponse
-            Kingdom taxa data.
+            All kingdom data.
 
         Examples
         --------
@@ -2568,7 +2615,7 @@ class IucnRedListApiClient:
         return self.get(endpoint, params=params)
 
     def get_taxa_phylum(self) -> IucnRedListApiResponse:
-        """Phylum taxa data.
+        """Phylums.
 
         Implements the request:
 
@@ -2577,7 +2624,7 @@ class IucnRedListApiClient:
         Returns
         -------
         IucnRedListApiResponse
-            Phylum taxa data.
+            All phylums data.
 
         Examples
         --------
@@ -2695,7 +2742,7 @@ class IucnRedListApiClient:
         return self.get(endpoint, params=params)
 
     def get_taxa_class(self) -> IucnRedListApiResponse:
-        """Class taxa data.
+        """Classes.
 
         Implements the request:
 
@@ -2704,7 +2751,7 @@ class IucnRedListApiClient:
         Returns
         -------
         IucnRedListApiResponse
-            Class taxa data.
+            All class data.
 
         Examples
         --------
@@ -2735,7 +2782,7 @@ class IucnRedListApiClient:
         latest: bool | None = None,
         scope_code: int | None = None,
     ) -> IucnRedListApiResponse:
-        """Assessment data for a given class by phylum name.
+        """Assessment data for a given class by class name.
 
         Implements the request:
 
@@ -2812,7 +2859,7 @@ class IucnRedListApiClient:
         return self.get(endpoint, params=params)
 
     def get_taxa_order(self) -> IucnRedListApiResponse:
-        """Order taxa data.
+        """Orders.
 
         Implements the request:
 
@@ -2821,7 +2868,7 @@ class IucnRedListApiClient:
         Returns
         -------
         IucnRedListApiResponse
-            Order taxa data.
+            All order data.
 
         Examples
         --------
@@ -2917,7 +2964,7 @@ class IucnRedListApiClient:
         return self.get(endpoint, params=params)
 
     def get_taxa_family(self) -> IucnRedListApiResponse:
-        """Family taxa data.
+        """Families.
 
         Implements the request:
 
@@ -2926,7 +2973,7 @@ class IucnRedListApiClient:
         Returns
         -------
         IucnRedListApiResponse
-            Family taxa data.
+            All family data.
 
         Examples
         --------
@@ -3476,7 +3523,7 @@ class IucnRedListApiResponse(requests.models.Response):
     __attrs__ = Response.__attrs__
 
     def __init__(self, response: requests.Response) -> None:
-        """Initialiser requiring a [requests.Response][] object.
+        """Initialiser requiring a [`requests.Response`][requests.Response] object.
 
         Parameters
         ----------

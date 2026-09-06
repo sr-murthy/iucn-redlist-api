@@ -13,12 +13,15 @@
   nav = [
     { "Home" = "index.md" },
     { "Getting Started" = "getting-started.md"},
-    { "API Client Reference" = "api-client-reference.md" },
+    { "Usage" = "usage.md" },
+    { "Client Reference" = "api-client-reference.md" },
+    { "Contributing" = "contributing.md" }
   ]
 
 # extra_css = ["stylesheets/extra.css"]
 
 [project.theme]
+  variant = "modern"
   favicon = ""
   logo = ""
   language = "en"
