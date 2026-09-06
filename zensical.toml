@@ -3,7 +3,7 @@
   site_name = "IUCN Red List of Threatened Species API - Python Client"
   site_description = "A Python client for the IUCN Red List of Threatened Species API"
   site_author = "Sandeep R. Murthy 🇦🇺"
-  copyright = "Copyright &copy; 2026 <a href='https://github.com/sr-murthy' target='_new'>Sandeep R. Murthy</a>  🇦🇺"
+  copyright = "Copyright &copy; 2026 <a href='https://github.com/sr-murthy' target='_new'>Sandeep R. Murthy</a> 🇦🇺"
   repo_url = "https://github.com/sr-murthy/iucn-redlist-api"
   repo_name = "GitHub"
   docs_dir = "docs"
