@@ -94,7 +94,7 @@ def version(ctx: click.Context, debug: bool):
 @click.pass_context
 def assessment_search(
     ctx: click.Context, filter_on: str, page_number: int, debug: bool
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     filter_on = list(map(str.strip, filter_on.split(",")))
     res_json = ctx.obj["api_client"].assessment_search(filter_on, page=page_number).json
@@ -124,7 +124,7 @@ def assessments(ctx: click.Context): ...
     help="Assessment ID",
 )
 @click.pass_context
-def get_assessment(ctx: click.Context, assessment_id: int, debug: bool) -> str:
+def get_assessment(ctx: click.Context, assessment_id: int, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_assessment(assessment_id).json
     click.echo(json.dumps(res_json, indent=4))
@@ -146,7 +146,7 @@ def biogeographical_realms(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_biogeographical_realms(ctx: click.Context, debug: bool) -> str:
+def get_biogeographical_realms(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_biogeographical_realms().json
     click.echo(json.dumps(res_json, indent=4))
@@ -222,7 +222,7 @@ def get_biogeographical_realm_assessments(
     possibly_extinct_in_the_wild: bool,
     scope_code: int,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -256,7 +256,7 @@ def comprehensive_groups(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_comprehensive_groups(ctx: click.Context, debug: bool) -> str:
+def get_comprehensive_groups(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_comprehensive_groups().json
     click.echo(json.dumps(res_json, indent=4))
@@ -328,7 +328,7 @@ def get_comprehensive_group_assessments(
     possibly_extinct_in_the_wild: bool,
     scope_code: int,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -362,7 +362,7 @@ def conservation_actions(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_conservation_actions(ctx: click.Context, debug: bool) -> str:
+def get_conservation_actions(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_conservation_actions().json
     click.echo(json.dumps(res_json, indent=4))
@@ -438,7 +438,7 @@ def get_conservation_action_assessments(
     possibly_extinct_in_the_wild: bool,
     scope_code: int,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -475,7 +475,7 @@ def countries(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_countries(ctx: click.Context, debug: bool) -> str:
+def get_countries(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_countries().json
     click.echo(json.dumps(res_json, indent=4))
@@ -551,7 +551,7 @@ def get_country_assessments(
     possibly_extinct_in_the_wild: bool,
     scope_code: int,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -588,7 +588,7 @@ def faos(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_faos(ctx: click.Context, debug: bool) -> str:
+def get_faos(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_faos().json
     click.echo(json.dumps(res_json, indent=4))
@@ -664,7 +664,7 @@ def get_fao_assessments(
     possibly_extinct_in_the_wild: bool,
     scope_code: int,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -698,7 +698,7 @@ def growth_forms(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_growth_forms(ctx: click.Context, debug: bool) -> str:
+def get_growth_forms(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_growth_forms().json
     click.echo(json.dumps(res_json, indent=4))
@@ -770,7 +770,7 @@ def get_growth_form_assessments(
     possibly_extinct_in_the_wild: bool,
     scope_code: int,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -806,7 +806,7 @@ def green_status(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_green_status_all(ctx: click.Context, debug: bool) -> str:
+def get_green_status_all(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_green_status_all().json
     click.echo(json.dumps(res_json, indent=4))
@@ -828,7 +828,7 @@ def habitats(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_habitats(ctx: click.Context, debug: bool) -> str:
+def get_habitats(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_habitats().json
     click.echo(json.dumps(res_json, indent=4))
@@ -898,7 +898,7 @@ def get_habitat_assessments(
     possibly_extinct_in_the_wild: bool,
     scope_code: int,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -968,7 +968,7 @@ def population_trends(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_population_trends(ctx: click.Context, debug: bool) -> str:
+def get_population_trends(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_population_trends().json
     click.echo(json.dumps(res_json, indent=4))
@@ -1040,7 +1040,7 @@ def get_population_trend_assessments(
     possibly_extinct_in_the_wild: bool,
     scope_code: int,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -1077,7 +1077,7 @@ def red_list_categories(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_red_list_categories(ctx: click.Context, debug: bool) -> str:
+def get_red_list_categories(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_red_list_categories().json
     click.echo(json.dumps(res_json, indent=4))
@@ -1153,7 +1153,7 @@ def get_red_list_category_assessments(
     possibly_extinct_in_the_wild: bool,
     scope_code: int,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -1187,7 +1187,7 @@ def research(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_research(ctx: click.Context, debug: bool) -> str:
+def get_research(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_research().json
     click.echo(json.dumps(res_json, indent=4))
@@ -1263,7 +1263,7 @@ def get_research_assessments(
     possibly_extinct_in_the_wild: bool,
     scope_code: int,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -1297,7 +1297,7 @@ def scopes(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_scopes(ctx: click.Context, debug: bool) -> str:
+def get_scopes(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_scopes().json
     click.echo(json.dumps(res_json, indent=4))
@@ -1364,7 +1364,7 @@ def get_scope_assessments(
     possibly_extinct_in_the_wild: bool,
     scope_code: int,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -1397,7 +1397,7 @@ def statistics(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_statistics_count(ctx: click.Context, debug: bool) -> str:
+def get_statistics_count(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_statistics_count().json
     click.echo(json.dumps(res_json, indent=4))
@@ -1419,7 +1419,7 @@ def stresses(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_stresses(ctx: click.Context, debug: bool) -> str:
+def get_stresses(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_stresses().json
     click.echo(json.dumps(res_json, indent=4))
@@ -1495,7 +1495,7 @@ def get_stress_assessments(
     possibly_extinct_in_the_wild: bool,
     scope_code: int,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -1516,7 +1516,7 @@ def get_stress_assessments(
 # ---------------------------------------------------------------------------#
 # --- Ecosystems command group ----------------------------------------------#
 # ---------------------------------------------------------------------------#
-@redlist_cli.group("systems", help="Ecosystems data")
+@redlist_cli.group("systems", help="Ecosystems")
 @click.pass_context
 def systems(ctx: click.Context): ...
 
@@ -1529,7 +1529,7 @@ def systems(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_systems(ctx: click.Context, debug: bool) -> str:
+def get_systems(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_systems().json
     click.echo(json.dumps(res_json, indent=4))
@@ -1599,7 +1599,7 @@ def get_system_assessments(
     possibly_extinct_in_the_wild: bool,
     scope_code: int,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -1645,13 +1645,13 @@ def sis(ctx: click.Context): ...
 )
 @click.option("-i", "--sis-id", required=True, type=int, help="SIS ID")
 @click.pass_context
-def get_taxa_sis_assessments(ctx: click.Context, sis_id: int, debug: bool) -> str:
+def get_taxa_sis_assessments(ctx: click.Context, sis_id: int, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_taxa_sis_assessments(sis_id).json
     click.echo(json.dumps(res_json, indent=4))
 
 
-@taxa.group("scientific-name", help="Requests related to taxa using scientific names")
+@taxa.group("scientific-name", help="Taxa by scientific name")
 @click.pass_context
 def scientific_name(ctx: click.Context): ...
 
@@ -1692,7 +1692,7 @@ def get_taxa_scientific_name_assessments(
     infra_name: str,
     subpopulation_name: str,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -1720,7 +1720,7 @@ def kingdom(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_taxa_kingdom(ctx: click.Context, debug: bool) -> str:
+def get_taxa_kingdom(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_taxa_kingdom().json
     click.echo(json.dumps(res_json, indent=4))
@@ -1775,7 +1775,7 @@ def get_taxa_kingdom_assessments(
     latest: bool,
     scope_code: str,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -1804,7 +1804,7 @@ def phylum(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_taxa_phylum(ctx: click.Context, debug: bool) -> str:
+def get_taxa_phylum(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_taxa_phylum().json
     click.echo(json.dumps(res_json, indent=4))
@@ -1850,7 +1850,7 @@ def get_taxa_phylum_assessments(
     latest: bool,
     scope_code: str,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -1878,7 +1878,7 @@ def class_(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_taxa_class(ctx: click.Context, debug: bool) -> str:
+def get_taxa_class(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_taxa_class().json
     click.echo(json.dumps(res_json, indent=4))
@@ -1924,7 +1924,7 @@ def get_taxa_class_assessments(
     latest: bool,
     scope_code: str,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -1952,7 +1952,7 @@ def order(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_taxa_order(ctx: click.Context, debug: bool) -> str:
+def get_taxa_order(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_taxa_order().json
     click.echo(json.dumps(res_json, indent=4))
@@ -1998,7 +1998,7 @@ def get_taxa_order_assessments(
     latest: bool,
     scope_code: str,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -2026,7 +2026,7 @@ def family(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_taxa_family(ctx: click.Context, debug: bool) -> str:
+def get_taxa_family(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_taxa_family().json
     click.echo(json.dumps(res_json, indent=4))
@@ -2072,7 +2072,7 @@ def get_taxa_family_assessments(
     latest: bool,
     scope_code: str,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -2095,7 +2095,7 @@ def get_taxa_family_assessments(
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_taxa_possibly_extinct(ctx: click.Context, debug: bool) -> str:
+def get_taxa_possibly_extinct(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_taxa_possibly_extinct().json
     click.echo(json.dumps(res_json, indent=4))
@@ -2112,7 +2112,7 @@ def get_taxa_possibly_extinct(ctx: click.Context, debug: bool) -> str:
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_taxa_possibly_extinct_in_the_wild(ctx: click.Context, debug: bool) -> str:
+def get_taxa_possibly_extinct_in_the_wild(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_taxa_possibly_extinct_in_the_wild().json
     click.echo(json.dumps(res_json, indent=4))
@@ -2121,7 +2121,7 @@ def get_taxa_possibly_extinct_in_the_wild(ctx: click.Context, debug: bool) -> st
 # ---------------------------------------------------------------------------#
 # --- Threats command group -------------------------------------------------#
 # ---------------------------------------------------------------------------#
-@redlist_cli.group("threats", help="Species threat factors data")
+@redlist_cli.group("threats", help="Species threat factors")
 @click.pass_context
 def threats(ctx: click.Context): ...
 
@@ -2134,7 +2134,7 @@ def threats(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_threats(ctx: click.Context, debug: bool) -> str:
+def get_threats(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_threats().json
     click.echo(json.dumps(res_json, indent=4))
@@ -2204,7 +2204,7 @@ def get_threat_assessments(
     possibly_extinct_in_the_wild: bool,
     scope_code: int,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -2225,7 +2225,7 @@ def get_threat_assessments(
 # ---------------------------------------------------------------------------#
 # --- Use and trade command group -------------------------------------------#
 # ---------------------------------------------------------------------------#
-@redlist_cli.group("use-and-trade", help="Species use and trade factors data")
+@redlist_cli.group("use-and-trade", help="Species use and trade factors")
 @click.pass_context
 def use_and_trade(ctx: click.Context): ...
 
@@ -2238,7 +2238,7 @@ def use_and_trade(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_use_and_trade(ctx: click.Context, debug: bool) -> str:
+def get_use_and_trade(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_use_and_trade().json
     click.echo(json.dumps(res_json, indent=4))
@@ -2314,7 +2314,7 @@ def get_use_and_trade_assessments(
     possibly_extinct_in_the_wild: bool,
     scope_code: int,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]

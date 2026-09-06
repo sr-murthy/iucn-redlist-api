@@ -59,10 +59,10 @@ Commands:
   scopes                  Geographic assessment scopes
   statistics              Assessment statistics
   stresses                Species stress factors
-  systems                 Ecosystems data
+  systems                 Ecosystems
   taxa                    Taxa
-  threats                 Species threat factors data
-  use-and-trade           Species use and trade factors data
+  threats                 Species threat factors
+  use-and-trade           Species use and trade factors
 ```
 
 The command tree structure reflects the API structure, which is also reflected in the structure of the [API client methods](api-client-reference#iucn_redlist_api.api.IucnRedListApiClient).
@@ -87,7 +87,7 @@ Commands:
   phylum                        Phylums
   possibly-extinct              Possibly extinct taxa
   possibly-extinct-in-the-wild  Taxa that are possibly extinct in the wild
-  scientific-name               Requests related to taxa using scientific...
+  scientific-name               Taxa by scientific name
   sis                           Taxa based on Species Information Service...
 ```
 
@@ -412,9 +412,11 @@ redlist-cli taxa possibly-extinct-in-the-wild
 
 #### Country Assessments
 
-Getting all available assessments for Australia 🇦🇺 published in 20205 that contain species indications of possibly extinct status:
+Getting all available assessments for Australia 🇦🇺 published in 2025 that contain species indications of possibly extinct status:
 ```shell
-redlist-cli countries get-assessments --country-code AU --year-published 2025 --possibly-extinc
+redlist-cli countries get-assessments --country-code AU --year-published 2025 --possibly-extinct
+```
+```shell
 {
     "country": {
         "description": {
@@ -512,7 +514,7 @@ python3 -c "import pandas as pd; pd.read_json('./possibly-ew.json').to_excel('./
 
     The Excel example requires [`openpyxl`](https://pypi.org/project/openpyxl/) to be installed in the working environment, and both examples require `jq` and Pandas.
 
-You can also of course capture the response JSON streams manually by copying them directly into files, and using other applications to manually export the data into the desired formats.
+You can also of course capture the response JSON streams manually by copying them directly into JSON files, and using other tools and applications to manually export the data into the desired formats.
 
 #### Debug Mode
 
