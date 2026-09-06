@@ -9,6 +9,6 @@ The basic process for code contributions is fairly simple:
 1. Get a working copy of the <a href="https://github.com/sr-murthy/iucn-redlist-api" target="_blank" title="iucn-redlist-api">repository</a> either as a direct clone or a clone of a fork.
 2. Create a pull request (PR) against the `main` branch of this repository with your proposed changes, and request a review from the maintainer (me).
 3. Address any comments and/or suggestions from the review, and re-request a review if required.
-4. On approval, either merge it yourself if you have the necessary permissions, or wait for the maintainer (me) to merge it.
+4. On approval, either merge it yourself if you have the necessary permissions, or request the maintainer (me) to merge it.
 
 Bug reports and feature requests can be made in the <a href="https://github.com/sr-murthy/iucn-redlist-api/issues" target="_blank" title="iucn-redlist-api GitHub Issues">Issues</a> section.

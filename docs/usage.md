@@ -14,13 +14,13 @@ An equivalent, but easier way of using `iucn-redlist-api` may be as a command li
 
 ### Installation
 
-The `redlist-cli` becomes available when the project is installed as a package, i.e. from PyPI, [non-editable mode](getting-started#non-editable-installation) or [editable mode](getting-started#editable-installation) mode, as described above.
+The `redlist-cli` becomes available when the project is installed as a package, i.e. from PyPI, or when installed either in [non-editable](getting-started#non-editable-installation) or [editable](getting-started#editable-installation) mode, as described above.
 
 !!! note
 
     You don't need an editable installation, unless you wish to evaluate and contribute changes via pull requests (PR)s.
 
-All commands make [API](https://api.iucnredlist.org/api-docs/index.html) requests, and require the API key to be available in the environment, which can be done by setting an `API_KEY` environment variable, e.g. a simple command line export in Linux / MacOS:
+All non-group commands make [API](https://api.iucnredlist.org/api-docs/index.html) requests, and require the API key to be available in the environment, which can be done by setting an `API_KEY` environment variable, e.g. a simple command line export in Linux / MacOS:
 ```shell
 export API_KEY="<Red List API key>"
 ```
@@ -96,7 +96,7 @@ All non-group commands produce JSON responses, which could be empty depending on
 
 ### Basic Examples
 
-A selection of some specific examples, with individual commands and command outputs (abbreviated where they are too long) listed separately below each other, is shown below.
+A selection of some specific examples, with individual commands and command outputs (abbreviated where they are too long) listed separately below each other, is given below.
 
 #### Red List and API Information
 
@@ -493,22 +493,22 @@ redlist-cli green-status get-all
 }
 ```
 
-#### A Note on Data Capture and Export
+### A Note on Data Capture and Export
 
-The JSON response streams in the CLI console output can be captured quickly in Linux/MacOS/WSL by redirection to file, e.g.
+The JSON response streams in the CLI console output can be captured easily in Linux/MacOS/WSL by redirection to file, e.g.
 ```shell
 redlist-cli green-status get-all > ./green-status.json
 ```
 
-Depending on your requirements, the JSON data can then be exported to other formats such as CSV or Excel. If you're comfortable on the command line with JSON stream parsing tools such as [`jq`](https://jqlang.org/) you can also do this directly, with the additional use of Python and [Pandas](https://pandas.pydata.org), e.g. to CSV:
+Depending on your requirements, the JSON data can then be exported to other formats such as CSV or Excel. If you're comfortable on the command line with JSON stream parsing tools such as <a href="https://jqlang.org/" target="_blank" title="jq">`jq`</a> you can also do this directly, with the additional use of Python and <a href="https://pandas.pydata.org" target="_blank" title="Pandas">Pandas</a>, e.g. to CSV:
 ```shell
-redlist-cli taxa possibly-extinct-in-the-wild | jq '.["assessments"]' > possibly-ew.json && \
-python3 -c "import pandas as pd; pd.read_json('./possibly-ew.json').to_csv('./possibly-ew.csv', index=False)"
+redlist-cli taxa possibly-extinct-in-the-wild | jq '.["assessments"]' > possibly-exw.json && \
+python3 -c "import pandas as pd; pd.read_json('./possibly-exw.json').to_csv('./possibly-exw.csv', index=False)"
 ```
 and Excel:
 ```shell
-redlist-cli taxa possibly-extinct-in-the-wild | jq '.["assessments"]' > possibly-ew.json && \
-python3 -c "import pandas as pd; pd.read_json('./possibly-ew.json').to_excel('./possibly-ew.xlsx', index=True)"
+redlist-cli taxa possibly-extinct-in-the-wild | jq '.["assessments"]' > possibly-exw.json && \
+python3 -c "import pandas as pd; pd.read_json('./possibly-exw.json').to_excel('./possibly-exw.xlsx', index=True)"
 ```
 
 !!! note
@@ -517,7 +517,7 @@ python3 -c "import pandas as pd; pd.read_json('./possibly-ew.json').to_excel('./
 
 You can also of course capture the response JSON streams manually by copying them directly into JSON files, and using other tools and applications to manually export the data into the desired formats.
 
-#### Debug Mode
+### Debug Mode
 
 There is a global debug mode flag (defaulting to `False`) you can set for `redlist-cli`, which can also be overridden in the request-level commands, e.g.:
 ```shell
