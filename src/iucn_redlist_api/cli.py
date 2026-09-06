@@ -1695,7 +1695,6 @@ def get_taxa_scientific_name_assessments(
     species_name: str,
     infra_name: str,
     subpopulation_name: str,
-    latest: bool,
     debug: bool,
 ) -> str:
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
