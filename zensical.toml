@@ -1,5 +1,5 @@
 [project]
-  site_url = "http://localhost:8000/sr-murthy/iucn-redlist-api/"
+  site_url = "http://iucn-redlist-api.reathedocs.io/en/latest"
   site_name = "IUCN Red List of Threatened Species API - Python Client & CLI"
   site_description = "A Python client & CLI for the IUCN Red List of Threatened Species API"
   site_author = "Sandeep R. Murthy 🇦🇺"
@@ -25,6 +25,7 @@
   favicon = ""
   logo = ""
   language = "en"
+  custom_dir = "docs/overrides"
   features = [
     "announce.dismiss",
     "content.code.annotate",
