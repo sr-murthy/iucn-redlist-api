@@ -1,7 +1,7 @@
 [project]
 
   name = "iucn-redlist-api"
-  description = "Python client and CLI for the IUCN Red List of Threatened Species API"
+  description = "Python client & CLI for the IUCN Red List of Threatened Species API"
 
   authors = [
       {name = "Sandeep R. Murthy", email = "srm@tuta.com"},

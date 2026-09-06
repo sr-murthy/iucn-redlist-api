@@ -4,7 +4,7 @@ There is a comprehensive <a href="https://api.iucnredlist.org/api-docs/index.htm
 
 ## Client
 
-The client methods are fully documented in the [API client reference](reference/api-client-reference), with example snippets. A more detailed client usage guide may be added at some point in the future.
+The client methods are fully documented in the [API Client Reference](api-client-reference), with example snippets. A more detailed client usage guide may be added at some point in the future.
 
 An equivalent, but easier way of using `iucn-redlist-api` may be as a command line tool. This is described in more detail below.
 
@@ -14,12 +14,13 @@ An equivalent, but easier way of using `iucn-redlist-api` may be as a command li
 
 ### Installation
 
-The `redlist-cli` becomes available when the project is installed as a package, i.e. from PyPI, [non-editable mode](getting-started#non-editable-installation) or [editable mode](getting-started#editable-installation) mode, as described above.
+The `redlist-cli` becomes available when the project is installed as a package, i.e. from PyPI, or when installed either in [non-editable](getting-started#non-editable-installation) or [editable](getting-started#editable-installation) mode, as described above.
 
 !!! note
+
     You don't need an editable installation, unless you wish to evaluate and contribute changes via pull requests (PR)s.
 
-All commands make [API](https://api.iucnredlist.org/api-docs/index.html) requests, and require the API key to be available in the environment, which can be done by setting an `API_KEY` environment variable, e.g. a simple command line export in Linux / MacOS:
+All non-group commands make [API](https://api.iucnredlist.org/api-docs/index.html) requests, and require the API key to be available in the environment, which can be done by setting an `API_KEY` environment variable, e.g. a simple command line export in Linux / MacOS:
 ```shell
 export API_KEY="<Red List API key>"
 ```
@@ -59,10 +60,10 @@ Commands:
   scopes                  Geographic assessment scopes
   statistics              Assessment statistics
   stresses                Species stress factors
-  systems                 Ecosystems data
+  systems                 Ecosystems
   taxa                    Taxa
-  threats                 Species threat factors data
-  use-and-trade           Species use and trade factors data
+  threats                 Species threat factors
+  use-and-trade           Species use and trade factors
 ```
 
 The command tree structure reflects the API structure, which is also reflected in the structure of the [API client methods](api-client-reference#iucn_redlist_api.api.IucnRedListApiClient).
@@ -87,7 +88,7 @@ Commands:
   phylum                        Phylums
   possibly-extinct              Possibly extinct taxa
   possibly-extinct-in-the-wild  Taxa that are possibly extinct in the wild
-  scientific-name               Requests related to taxa using scientific...
+  scientific-name               Taxa by scientific name
   sis                           Taxa based on Species Information Service...
 ```
 
@@ -95,7 +96,7 @@ All non-group commands produce JSON responses, which could be empty depending on
 
 ### Basic Examples
 
-A selection of some specific examples, with individual commands and command outputs (abbreviated where they are too long) listed separately below each other, is shown below.
+A selection of some specific examples, with individual commands and command outputs (abbreviated where they are too long) listed separately below each other, is given below.
 
 #### Red List and API Information
 
@@ -410,6 +411,52 @@ The command for possibly extinct in the wild status is almost identical:
 redlist-cli taxa possibly-extinct-in-the-wild
 ```
 
+#### Country Assessments
+
+Getting all available assessments for Australia 🇦🇺 published in 2025 that contain species indications of possibly extinct status:
+```shell
+redlist-cli countries get-assessments --country-code AU --year-published 2025 --possibly-extinct
+```
+```shell
+{
+    "country": {
+        "description": {
+            "en": "Australia"
+        },
+        "code": "AU"
+    },
+    "assessments": [
+        {
+            "assessment_date": "2023-06-01T01:00:00.000+01:00",
+            "year_published": "2025",
+            "latest": true,
+            "possibly_extinct": true,
+            "possibly_extinct_in_the_wild": false,
+            "sis_taxon_id": 221324039,
+            "criteria": "B1ab(iii)+2ab(iii)",
+            "url": "https://www.iucnredlist.org/species/221324039/235751186",
+            "taxon_scientific_name": "Tympanocryptis mccartneyi",
+            "red_list_category_code": "CR",
+            "assessment_id": 235751186,
+            "code": "AU",
+            "code_type": "country",
+            "scopes": [
+                {
+                    "description": {
+                        "en": "Global"
+                    },
+                    "code": "1"
+                }
+            ]
+        }
+    ],
+    "filters": {
+        "year_published": "2025",
+        "possibly_extinct": "True"
+    }
+}
+```
+
 #### Green (Recovery and Conservation) Status of Species
 
 Getting all available green status assessments of species:
@@ -448,25 +495,27 @@ redlist-cli green-status get-all
 
 ### A Note on Data Capture and Export
 
-The JSON response streams in the CLI console output can be captured quickly in Linux/MacOS/WSL by redirection to file, e.g.
+The JSON response streams in the CLI console output can be captured easily in Linux/MacOS/WSL by redirection to file, e.g.
 ```shell
 redlist-cli green-status get-all > ./green-status.json
 ```
 
-Depending on your requirements, the JSON data can then be exported to other formats such as CSV or Excel. If you're comfortable on the command line with JSON parsing tools such as [`jq`](https://jqlang.org/) you can also do this directly, with the additional use of Python and [Pandas](https://pandas.pydata.org), e.g. to CSV:
+Depending on your requirements, the JSON data can then be exported to other formats such as CSV or Excel. If you're comfortable on the command line with JSON stream parsing tools such as <a href="https://jqlang.org/" target="_blank" title="jq">`jq`</a> you can also do this directly, with the additional use of Python and <a href="https://pandas.pydata.org" target="_blank" title="Pandas">Pandas</a>, e.g. to CSV:
 ```shell
-redlist-cli taxa possibly-extinct-in-the-wild | jq '.["assessments"]' > possibly-ew.json && python3 -c "import pandas as pd; pd.read_json('./possibly-ew.json').to_csv('./possibly-ew.csv', index=False)"
+redlist-cli taxa possibly-extinct-in-the-wild | jq '.["assessments"]' > possibly-exw.json && \
+python3 -c "import pandas as pd; pd.read_json('./possibly-exw.json').to_csv('./possibly-exw.csv', index=False)"
 ```
 and Excel:
 ```shell
-redlist-cli taxa possibly-extinct-in-the-wild | jq '.["assessments"]' > possibly-ew.json && python3 -c "import pandas as pd; pd.read_json('./possibly-ew.json').to_excel('./possibly-ew.xlsx', index=True)"
+redlist-cli taxa possibly-extinct-in-the-wild | jq '.["assessments"]' > possibly-exw.json && \
+python3 -c "import pandas as pd; pd.read_json('./possibly-exw.json').to_excel('./possibly-exw.xlsx', index=True)"
 ```
 
 !!! note
 
     The Excel example requires [`openpyxl`](https://pypi.org/project/openpyxl/) to be installed in the working environment, and both examples require `jq` and Pandas.
 
-You can also of course capture the JSON streams manually by copying them directly into files.
+You can also of course capture the response JSON streams manually by copying them directly into JSON files, and using other tools and applications to manually export the data into the desired formats.
 
 ### Debug Mode
 

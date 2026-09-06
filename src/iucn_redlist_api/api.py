@@ -63,12 +63,12 @@ class IucnRedListApiClient:
       {'description': {'en': 'Oceanian'}, 'code': '6'},
       {'description': {'en': 'Palearctic'}, 'code': '7'}]}
 
-    Show kingdom taxa.
+    Show kingdoms.
 
     >>> client.get_taxa_kingdom().json  # doctest: +NORMALIZE_WHITESPACE, +ELLIPSIS
     {'kingdom_names': ['ANIMALIA', 'CHROMISTA', 'FUNGI', 'PLANTAE']}
 
-    Get the latest data and assessments for the Tawny Eagle (Aquila rapax).
+    Get the latest data and assessments for the tawny eagle (*Aquila rapax*).
 
     >>> client.get_taxa_scientific_name_assessments('Aquila', 'rapax').json  # doctest: +NORMALIZE_WHITESPACE, +ELLIPSIS
     {'taxon': {'sis_id': 22696033,
@@ -114,10 +114,20 @@ class IucnRedListApiClient:
     2026-09-02 20:46:49 [DEBUG] iucn_redlist_api.api: Response 200: {'Date': 'Wed, 02 Sep 2026 19:46:49 GMT', 'Content-Type': 'application/json', 'Content-Length': '60', 'Connection': 'keep-alive', 'Cache-Control': 'max-age=0, private, must-revalidate', 'content-security-policy': "default-src 'self'; script-src 'self' https://static.cloudflareinsights.com https://cloud.umami.is https://ksbk62v4jgjkcqo3vmgzxqvu.agents.do-ai.run https://d1bxh8uas1mnw7.cloudfront.net https://embed.altmetric.com https://api.altmetric.com 'unsafe-inline' 'unsafe-eval'; style-src 'self' https://unpkg.com 'unsafe-inline'; img-src 'self' data: https://iucnredlist.org https://*.iucnredlist.org https://*.digitaloceanspaces.com https://*.tile.openstreetmap.org https://static.inaturalist.org https://www.inaturalist.org https://*.amazonaws.com https://server.arcgisonline.com https://badges.altmetric.com; font-src 'self'; object-src 'none'; connect-src 'self' https://api-gateway.umami.dev https://gateway.umami.is https://ksbk62v4jgjkcqo3vmgzxqvu.agents.do-ai.run; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://ksbk62v4jgjkcqo3vmgzxqvu.agents.do-ai.run https://cloud.umami.is https://iucnredlist.appsignal-status.com; frame-ancestors 'none'; form-action 'self'", 'etag': 'W/"986f7acb982a486adecfac980e922872"', 'feature-policy': "camera 'none'; gyroscope 'none'; microphone 'none'; usb 'none'; fullscreen 'none'; payment 'none'", 'strict-transport-security': 'max-age=31556952; includeSubDomains', 'vary': 'Accept-Encoding', 'x-cache': 'miss', 'x-request-id': '96234488-1675-4a30-8cf8-74fcab3a7229', 'x-runtime': '0.015784', 'Nel': '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}', 'cf-cache-status': 'DYNAMIC', 'Speculation-Rules': '"/cdn-cgi/speculation"', 'Report-To': '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=wUp0QCFY9j4WLVt5qAFQaeRTMtMGyPLPt9XY9hwLc9ksawM7dWDIcf0eIBr21OHAS4QmSuAto6bXp4%2FyEW%2Bv4NFnjMPYZktRX0Do96uKjmlfpPUaGqs1jTk%2BQcwzq16333wSISc%3D"}]}', 'Server': 'cloudflare', 'CF-RAY': 'a34f05e41915e034-CPH'}
     Out[86]: {'kingdom_names': ['ANIMALIA', 'CHROMISTA', 'FUNGI', 'PLANTAE']}
 
-    Note that toggling debug mode on/off in an existing client is not supported. Create a new client if you want to change debug mode.
+    or after you have created the client by toggling the [`debug_mode`][iucn_redlist_api.api.IucnRedListApiClient.debug_mode] property:
+
+    >>> client = IucnRedListApiClient(os.environ['API_KEY'])
+    >>> client
+    IucnRedListApiClient(api_version="v4", debug_mode=False)
+    >>> client.debug_mode = True
+    >>> client.get_information_red_list_version().json  # doctest: +SKIP
+    2026-09-06 13:40:09 [DEBUG] iucn_redlist_api.api: Requesting URL: https://api.iucnredlist.org/api/v4/information/red_list_version
+    2026-09-06 13:40:09 [DEBUG] urllib3.connectionpool: https://api.iucnredlist.org:443 "GET /api/v4/information/red_list_version HTTP/1.1" 200 29
+    2026-09-06 13:40:09 [DEBUG] iucn_redlist_api.api: Response 200: {'Date': 'Sun, 06 Sep 2026 12:40:09 GMT', 'Content-Type': 'application/json', 'Content-Length': '29', 'Connection': 'keep-alive', 'Cache-Control': 'max-age=0, private, must-revalidate', 'content-security-policy': "default-src 'self'; script-src 'self' https://static.cloudflareinsights.com https://cloud.umami.is https://ksbk62v4jgjkcqo3vmgzxqvu.agents.do-ai.run https://d1bxh8uas1mnw7.cloudfront.net https://embed.altmetric.com https://api.altmetric.com 'unsafe-inline' 'unsafe-eval'; style-src 'self' https://unpkg.com 'unsafe-inline'; img-src 'self' data: https://iucnredlist.org https://*.iucnredlist.org https://*.digitaloceanspaces.com https://*.tile.openstreetmap.org https://static.inaturalist.org https://www.inaturalist.org https://*.amazonaws.com https://server.arcgisonline.com https://badges.altmetric.com; font-src 'self'; object-src 'none'; connect-src 'self' https://api-gateway.umami.dev https://gateway.umami.is https://ksbk62v4jgjkcqo3vmgzxqvu.agents.do-ai.run; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://ksbk62v4jgjkcqo3vmgzxqvu.agents.do-ai.run https://cloud.umami.is https://iucnredlist.appsignal-status.com; frame-ancestors 'none'; form-action 'self'", 'etag': 'W/"5e6c91e7759c4f3a665c5e493cabf9fc"', 'feature-policy': "camera 'none'; gyroscope 'none'; microphone 'none'; usb 'none'; fullscreen 'none'; payment 'none'", 'strict-transport-security': 'max-age=31556952; includeSubDomains', 'vary': 'Accept-Encoding', 'x-cache': 'miss', 'x-request-id': 'ed80e39a-ab4a-4510-a42c-c5bc69fb843e', 'x-runtime': '0.041264', 'Nel': '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}', 'cf-cache-status': 'DYNAMIC', 'Speculation-Rules': '"/cdn-cgi/speculation"', 'Report-To': '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=P0Cn1gqVXqZPe6sAgFGPgDlVTFUg4hs47DbQYR%2FoBLODaPVtfA7LG99nx2X%2BYWsT4kalDS8KxnqBbV1czn4xlJmmPrTYtFuskqnEGghF9vTWEn4XmqTkME73wfCYaADBcdPbXQw%3D"}]}', 'Server': 'cloudflare', 'CF-RAY': 'a36d8a64b992b354-CPH'}
+    Out[5]: {'red_list_version': '2026-1'}
     """
 
-    # All instances have thse private attributes
+    # All instances have these private attributes from the start.
     _api_session: IucnRedListApiSession
     _debug_mode: bool = False
 
@@ -135,7 +145,7 @@ class IucnRedListApiClient:
 
             return self._debug_mode
 
-        # Otherrwise, configure the root logger to log at debug level, and
+        # Otherwise, configure the root logger to log at debug level, and
         # create a new instance logger that will inherit this root logger.
         self._debug_mode = True
         logging.getLogger("asyncio").setLevel(logging.WARNING)
@@ -3523,11 +3533,11 @@ class IucnRedListApiResponse(requests.models.Response):
     __attrs__ = Response.__attrs__
 
     def __init__(self, response: requests.Response) -> None:
-        """Initialiser requiring a [`requests.Response`][requests.Response] object.
+        """Initialiser requiring a [`requests.models.Response`][requests.models.Response] object.
 
         Parameters
         ----------
-        response : requests.Response
+        response : requests.models.Response
             The response from the original request.
         """
         self.__dict__.update(**response.__dict__)

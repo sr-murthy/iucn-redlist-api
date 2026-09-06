@@ -81,7 +81,7 @@ def version(ctx: click.Context, debug: bool):
     "--filter-on",
     required=True,
     type=str,
-    help="Comma-separated list of search criteria terms (str)",
+    help="Comma-separated list of search criteria terms",
 )
 @click.option(
     "-p",
@@ -89,12 +89,12 @@ def version(ctx: click.Context, debug: bool):
     required=False,
     type=int,
     default=None,
-    help="Optional page number in the response JSON, defaults to `None` (int)",
+    help="Optional page number in the response JSON, defaults to `None`",
 )
 @click.pass_context
 def assessment_search(
     ctx: click.Context, filter_on: str, page_number: int, debug: bool
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     filter_on = list(map(str.strip, filter_on.split(",")))
     res_json = ctx.obj["api_client"].assessment_search(filter_on, page=page_number).json
@@ -121,10 +121,10 @@ def assessments(ctx: click.Context): ...
     "--assessment-id",
     required=True,
     type=int,
-    help="Assessment ID (int)",
+    help="Assessment ID",
 )
 @click.pass_context
-def get_assessment(ctx: click.Context, assessment_id: int, debug: bool) -> str:
+def get_assessment(ctx: click.Context, assessment_id: int, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_assessment(assessment_id).json
     click.echo(json.dumps(res_json, indent=4))
@@ -146,7 +146,7 @@ def biogeographical_realms(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_biogeographical_realms(ctx: click.Context, debug: bool) -> str:
+def get_biogeographical_realms(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_biogeographical_realms().json
     click.echo(json.dumps(res_json, indent=4))
@@ -168,7 +168,7 @@ def get_biogeographical_realms(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=int,
     default=None,
-    help="Optional geographical assessment scope, defaults to `None` (int)",
+    help="Optional geographical assessment scope, defaults to `None`",
 )
 @click.option(
     "--possibly-extinct-in-the-wild",
@@ -194,7 +194,7 @@ def get_biogeographical_realms(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=str,
     default=None,
-    help="Optional publication year number, defaults to `None` (int)",
+    help="Optional publication year number, defaults to `None`",
 )
 @click.option(
     "-p",
@@ -202,14 +202,14 @@ def get_biogeographical_realms(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=str,
     default=None,
-    help="Optional page number in the response JSON, defaults to `None` (int)",
+    help="Optional page number in the response JSON, defaults to `None`",
 )
 @click.option(
     "-r",
     "--realm-code",
     required=True,
     type=int,
-    help="Biogeographical realm code (str)",
+    help="Biogeographical realm code",
 )
 @click.pass_context
 def get_biogeographical_realm_assessments(
@@ -222,7 +222,7 @@ def get_biogeographical_realm_assessments(
     possibly_extinct_in_the_wild: bool,
     scope_code: int,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -256,7 +256,7 @@ def comprehensive_groups(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_comprehensive_groups(ctx: click.Context, debug: bool) -> str:
+def get_comprehensive_groups(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_comprehensive_groups().json
     click.echo(json.dumps(res_json, indent=4))
@@ -278,7 +278,7 @@ def get_comprehensive_groups(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=int,
     default=None,
-    help="Optional geographical assessment scope, defaults to `None` (int)",
+    help="Optional geographical assessment scope, defaults to `None`",
 )
 @click.option(
     "--possibly-extinct-in-the-wild",
@@ -304,7 +304,7 @@ def get_comprehensive_groups(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=str,
     default=None,
-    help="Optional publication year number, defaults to `None` (int)",
+    help="Optional publication year number, defaults to `None`",
 )
 @click.option(
     "-p",
@@ -312,10 +312,10 @@ def get_comprehensive_groups(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=str,
     default=None,
-    help="Optional page number in the response JSON, defaults to `None` (int)",
+    help="Optional page number in the response JSON, defaults to `None`",
 )
 @click.option(
-    "-g", "--group-name", required=True, type=str, help="Comprehensive group name (str)"
+    "-g", "--group-name", required=True, type=str, help="Comprehensive group name"
 )
 @click.pass_context
 def get_comprehensive_group_assessments(
@@ -328,7 +328,7 @@ def get_comprehensive_group_assessments(
     possibly_extinct_in_the_wild: bool,
     scope_code: int,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -362,7 +362,7 @@ def conservation_actions(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_cooservation_actions(ctx: click.Context, debug: bool) -> str:
+def get_conservation_actions(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_conservation_actions().json
     click.echo(json.dumps(res_json, indent=4))
@@ -384,7 +384,7 @@ def get_cooservation_actions(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=int,
     default=None,
-    help="Optional geographical assessment scope, defaults to `None` (int)",
+    help="Optional geographical assessment scope, defaults to `None`",
 )
 @click.option(
     "--possibly-extinct-in-the-wild",
@@ -410,7 +410,7 @@ def get_cooservation_actions(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=str,
     default=None,
-    help="Optional publication year number, defaults to `None` (int)",
+    help="Optional publication year number, defaults to `None`",
 )
 @click.option(
     "-p",
@@ -418,14 +418,14 @@ def get_cooservation_actions(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=str,
     default=None,
-    help="Optional page number in the response JSON, defaults to `None` (int)",
+    help="Optional page number in the response JSON, defaults to `None`",
 )
 @click.option(
     "-a",
     "--action-code",
     required=True,
     type=str,
-    help="Conservation action code (str)",
+    help="Conservation action code",
 )
 @click.pass_context
 def get_conservation_action_assessments(
@@ -438,7 +438,7 @@ def get_conservation_action_assessments(
     possibly_extinct_in_the_wild: bool,
     scope_code: int,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -475,7 +475,7 @@ def countries(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_countries(ctx: click.Context, debug: bool) -> str:
+def get_countries(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_countries().json
     click.echo(json.dumps(res_json, indent=4))
@@ -497,7 +497,7 @@ def get_countries(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=int,
     default=None,
-    help="Optional geographical assessment scope, defaults to `None` (int)",
+    help="Optional geographical assessment scope, defaults to `None`",
 )
 @click.option(
     "--possibly-extinct-in-the-wild",
@@ -523,7 +523,7 @@ def get_countries(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=str,
     default=None,
-    help="Optional publication year number, defaults to `None` (int)",
+    help="Optional publication year number, defaults to `None`",
 )
 @click.option(
     "-p",
@@ -531,14 +531,14 @@ def get_countries(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=str,
     default=None,
-    help="Optional page number in the response JSON, defaults to `None` (int)",
+    help="Optional page number in the response JSON, defaults to `None`",
 )
 @click.option(
     "-c",
     "--country-code",
     required=True,
     type=str,
-    help="Country ISO alpha-2 code (str)",
+    help="Country ISO alpha-2 code",
 )
 @click.pass_context
 def get_country_assessments(
@@ -551,7 +551,7 @@ def get_country_assessments(
     possibly_extinct_in_the_wild: bool,
     scope_code: int,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -588,7 +588,7 @@ def faos(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_faos(ctx: click.Context, debug: bool) -> str:
+def get_faos(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_faos().json
     click.echo(json.dumps(res_json, indent=4))
@@ -610,7 +610,7 @@ def get_faos(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=int,
     default=None,
-    help="Optional geographical assessment scope, defaults to `None` (int)",
+    help="Optional geographical assessment scope, defaults to `None`",
 )
 @click.option(
     "--possibly-extinct-in-the-wild",
@@ -636,7 +636,7 @@ def get_faos(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=str,
     default=None,
-    help="Optional publication year number, defaults to `None` (int)",
+    help="Optional publication year number, defaults to `None`",
 )
 @click.option(
     "-p",
@@ -644,14 +644,14 @@ def get_faos(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=str,
     default=None,
-    help="Optional page number in the response JSON, defaults to `None` (int)",
+    help="Optional page number in the response JSON, defaults to `None`",
 )
 @click.option(
     "-f",
     "--fao-code",
     required=True,
     type=str,
-    help="FAO international fishing areas code (str)",
+    help="FAO international fishing areas code",
 )
 @click.pass_context
 def get_fao_assessments(
@@ -664,7 +664,7 @@ def get_fao_assessments(
     possibly_extinct_in_the_wild: bool,
     scope_code: int,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -698,7 +698,7 @@ def growth_forms(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_growth_forms(ctx: click.Context, debug: bool) -> str:
+def get_growth_forms(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_growth_forms().json
     click.echo(json.dumps(res_json, indent=4))
@@ -720,7 +720,7 @@ def get_growth_forms(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=int,
     default=None,
-    help="Optional geographical assessment scope, defaults to `None` (int)",
+    help="Optional geographical assessment scope, defaults to `None`",
 )
 @click.option(
     "--possibly-extinct-in-the-wild",
@@ -746,7 +746,7 @@ def get_growth_forms(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=str,
     default=None,
-    help="Optional publication year number, defaults to `None` (int)",
+    help="Optional publication year number, defaults to `None`",
 )
 @click.option(
     "-p",
@@ -754,10 +754,10 @@ def get_growth_forms(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=str,
     default=None,
-    help="Optional page number in the response JSON, defaults to `None` (int)",
+    help="Optional page number in the response JSON, defaults to `None`",
 )
 @click.option(
-    "-g", "--growth-form-code", required=True, type=str, help="Growth form code (str)"
+    "-g", "--growth-form-code", required=True, type=str, help="Growth form code"
 )
 @click.pass_context
 def get_growth_form_assessments(
@@ -770,7 +770,7 @@ def get_growth_form_assessments(
     possibly_extinct_in_the_wild: bool,
     scope_code: int,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -806,7 +806,7 @@ def green_status(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_green_status_all(ctx: click.Context, debug: bool) -> str:
+def get_green_status_all(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_green_status_all().json
     click.echo(json.dumps(res_json, indent=4))
@@ -828,7 +828,7 @@ def habitats(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_habitats(ctx: click.Context, debug: bool) -> str:
+def get_habitats(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_habitats().json
     click.echo(json.dumps(res_json, indent=4))
@@ -850,7 +850,7 @@ def get_habitats(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=int,
     default=None,
-    help="Optional geographical assessment scope, defaults to `None` (int)",
+    help="Optional geographical assessment scope, defaults to `None`",
 )
 @click.option(
     "--possibly-extinct-in-the-wild",
@@ -876,7 +876,7 @@ def get_habitats(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=str,
     default=None,
-    help="Optional publication year number, defaults to `None` (int)",
+    help="Optional publication year number, defaults to `None`",
 )
 @click.option(
     "-p",
@@ -884,11 +884,9 @@ def get_habitats(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=str,
     default=None,
-    help="Optional page number in the response JSON, defaults to `None` (int)",
+    help="Optional page number in the response JSON, defaults to `None`",
 )
-@click.option(
-    "-h", "--habitat-code", required=True, type=str, help="Habitat code (str)"
-)
+@click.option("-h", "--habitat-code", required=True, type=str, help="Habitat code")
 @click.pass_context
 def get_habitat_assessments(
     ctx: click.Context,
@@ -900,7 +898,7 @@ def get_habitat_assessments(
     possibly_extinct_in_the_wild: bool,
     scope_code: int,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -934,7 +932,7 @@ def information(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def info_api_version(ctx: click.Context, debug: bool):
+def information_api_version(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_information_api_version().json
     click.echo(json.dumps(res_json, indent=4))
@@ -948,7 +946,7 @@ def info_api_version(ctx: click.Context, debug: bool):
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def info_version(ctx: click.Context, debug: bool):
+def information_version(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_information_red_list_version().json
     click.echo(json.dumps(res_json, indent=4))
@@ -970,7 +968,7 @@ def population_trends(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_population_trends(ctx: click.Context, debug: bool) -> str:
+def get_population_trends(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_population_trends().json
     click.echo(json.dumps(res_json, indent=4))
@@ -992,7 +990,7 @@ def get_population_trends(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=int,
     default=None,
-    help="Optional geographical assessment scope, defaults to `None` (int)",
+    help="Optional geographical assessment scope, defaults to `None`",
 )
 @click.option(
     "--possibly-extinct-in-the-wild",
@@ -1018,7 +1016,7 @@ def get_population_trends(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=str,
     default=None,
-    help="Optional publication year number, defaults to `None` (int)",
+    help="Optional publication year number, defaults to `None`",
 )
 @click.option(
     "-p",
@@ -1026,10 +1024,10 @@ def get_population_trends(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=str,
     default=None,
-    help="Optional page number in the response JSON, defaults to `None` (int)",
+    help="Optional page number in the response JSON, defaults to `None`",
 )
 @click.option(
-    "-t", "--trend-code", required=True, type=str, help="Population trend code (str)"
+    "-t", "--trend-code", required=True, type=str, help="Population trend code"
 )
 @click.pass_context
 def get_population_trend_assessments(
@@ -1042,7 +1040,7 @@ def get_population_trend_assessments(
     possibly_extinct_in_the_wild: bool,
     scope_code: int,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -1079,7 +1077,7 @@ def red_list_categories(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_red_list_categories(ctx: click.Context, debug: bool) -> str:
+def get_red_list_categories(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_red_list_categories().json
     click.echo(json.dumps(res_json, indent=4))
@@ -1101,7 +1099,7 @@ def get_red_list_categories(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=int,
     default=None,
-    help="Optional geographical assessment scope, defaults to `None` (int)",
+    help="Optional geographical assessment scope, defaults to `None`",
 )
 @click.option(
     "--possibly-extinct-in-the-wild",
@@ -1127,7 +1125,7 @@ def get_red_list_categories(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=str,
     default=None,
-    help="Optional publication year number, defaults to `None` (int)",
+    help="Optional publication year number, defaults to `None`",
 )
 @click.option(
     "-p",
@@ -1135,14 +1133,14 @@ def get_red_list_categories(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=str,
     default=None,
-    help="Optional page number in the response JSON, defaults to `None` (int)",
+    help="Optional page number in the response JSON, defaults to `None`",
 )
 @click.option(
     "-c",
     "--category-code",
     required=True,
     type=str,
-    help="Red List category code (str)",
+    help="Red List category code",
 )
 @click.pass_context
 def get_red_list_category_assessments(
@@ -1155,7 +1153,7 @@ def get_red_list_category_assessments(
     possibly_extinct_in_the_wild: bool,
     scope_code: int,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -1189,7 +1187,7 @@ def research(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_research(ctx: click.Context, debug: bool) -> str:
+def get_research(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_research().json
     click.echo(json.dumps(res_json, indent=4))
@@ -1211,7 +1209,7 @@ def get_research(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=int,
     default=None,
-    help="Optional geographical assessment scope, defaults to `None` (int)",
+    help="Optional geographical assessment scope, defaults to `None`",
 )
 @click.option(
     "--possibly-extinct-in-the-wild",
@@ -1237,7 +1235,7 @@ def get_research(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=str,
     default=None,
-    help="Optional publication year number, defaults to `None` (int)",
+    help="Optional publication year number, defaults to `None`",
 )
 @click.option(
     "-p",
@@ -1245,14 +1243,14 @@ def get_research(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=str,
     default=None,
-    help="Optional page number in the response JSON, defaults to `None` (int)",
+    help="Optional page number in the response JSON, defaults to `None`",
 )
 @click.option(
     "-r",
     "--research-code",
     required=True,
     type=str,
-    help="Research category code (str)",
+    help="Research category code",
 )
 @click.pass_context
 def get_research_assessments(
@@ -1265,7 +1263,7 @@ def get_research_assessments(
     possibly_extinct_in_the_wild: bool,
     scope_code: int,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -1299,7 +1297,7 @@ def scopes(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_scopes(ctx: click.Context, debug: bool) -> str:
+def get_scopes(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_scopes().json
     click.echo(json.dumps(res_json, indent=4))
@@ -1339,7 +1337,7 @@ def get_scopes(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=str,
     default=None,
-    help="Optional publication year number, defaults to `None` (int)",
+    help="Optional publication year number, defaults to `None`",
 )
 @click.option(
     "-p",
@@ -1347,14 +1345,14 @@ def get_scopes(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=str,
     default=None,
-    help="Optional page number in the response JSON, defaults to `None` (int)",
+    help="Optional page number in the response JSON, defaults to `None`",
 )
 @click.option(
     "-s",
     "--scope-code",
     required=True,
     type=str,
-    help="Geographic assessment scope code (str)",
+    help="Geographic assessment scope code",
 )
 @click.pass_context
 def get_scope_assessments(
@@ -1366,7 +1364,7 @@ def get_scope_assessments(
     possibly_extinct_in_the_wild: bool,
     scope_code: int,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -1399,7 +1397,7 @@ def statistics(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_statistics_count(ctx: click.Context, debug: bool) -> str:
+def get_statistics_count(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_statistics_count().json
     click.echo(json.dumps(res_json, indent=4))
@@ -1421,7 +1419,7 @@ def stresses(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_stresses(ctx: click.Context, debug: bool) -> str:
+def get_stresses(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_stresses().json
     click.echo(json.dumps(res_json, indent=4))
@@ -1443,7 +1441,7 @@ def get_stresses(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=int,
     default=None,
-    help="Optional geographical assessment scope, defaults to `None` (int)",
+    help="Optional geographical assessment scope, defaults to `None`",
 )
 @click.option(
     "--possibly-extinct-in-the-wild",
@@ -1469,7 +1467,7 @@ def get_stresses(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=str,
     default=None,
-    help="Optional publication year number, defaults to `None` (int)",
+    help="Optional publication year number, defaults to `None`",
 )
 @click.option(
     "-p",
@@ -1477,14 +1475,14 @@ def get_stresses(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=str,
     default=None,
-    help="Optional page number in the response JSON, defaults to `None` (int)",
+    help="Optional page number in the response JSON, defaults to `None`",
 )
 @click.option(
     "-t",
     "--stress-code",
     required=True,
     type=str,
-    help="Species stress factor code (str)",
+    help="Species stress factor code",
 )
 @click.pass_context
 def get_stress_assessments(
@@ -1497,7 +1495,7 @@ def get_stress_assessments(
     possibly_extinct_in_the_wild: bool,
     scope_code: int,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -1518,7 +1516,7 @@ def get_stress_assessments(
 # ---------------------------------------------------------------------------#
 # --- Ecosystems command group ----------------------------------------------#
 # ---------------------------------------------------------------------------#
-@redlist_cli.group("systems", help="Ecosystems data")
+@redlist_cli.group("systems", help="Ecosystems")
 @click.pass_context
 def systems(ctx: click.Context): ...
 
@@ -1531,7 +1529,7 @@ def systems(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_systems(ctx: click.Context, debug: bool) -> str:
+def get_systems(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_systems().json
     click.echo(json.dumps(res_json, indent=4))
@@ -1553,7 +1551,7 @@ def get_systems(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=int,
     default=None,
-    help="Optional geographical assessment scope, defaults to `None` (int)",
+    help="Optional geographical assessment scope, defaults to `None`",
 )
 @click.option(
     "--possibly-extinct-in-the-wild",
@@ -1579,7 +1577,7 @@ def get_systems(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=str,
     default=None,
-    help="Optional publication year number, defaults to `None` (int)",
+    help="Optional publication year number, defaults to `None`",
 )
 @click.option(
     "-p",
@@ -1587,11 +1585,9 @@ def get_systems(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=str,
     default=None,
-    help="Optional page number in the response JSON, defaults to `None` (int)",
+    help="Optional page number in the response JSON, defaults to `None`",
 )
-@click.option(
-    "-t", "--system-code", required=True, type=str, help="Ecosystem code (str)"
-)
+@click.option("-t", "--system-code", required=True, type=str, help="Ecosystem code")
 @click.pass_context
 def get_system_assessments(
     ctx: click.Context,
@@ -1603,7 +1599,7 @@ def get_system_assessments(
     possibly_extinct_in_the_wild: bool,
     scope_code: int,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -1647,15 +1643,15 @@ def sis(ctx: click.Context): ...
     default=False,
     help="Debug mode for the request and the response",
 )
-@click.option("-i", "--sis-id", required=True, type=int, help="SIS ID (int)")
+@click.option("-i", "--sis-id", required=True, type=int, help="SIS ID")
 @click.pass_context
-def get_taxa_sis_assessments(ctx: click.Context, sis_id: int, debug: bool) -> str:
+def get_taxa_sis_assessments(ctx: click.Context, sis_id: int, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_taxa_sis_assessments(sis_id).json
     click.echo(json.dumps(res_json, indent=4))
 
 
-@taxa.group("scientific-name", help="Requests related to taxa using scientific names")
+@taxa.group("scientific-name", help="Taxa by scientific name")
 @click.pass_context
 def scientific_name(ctx: click.Context): ...
 
@@ -1676,7 +1672,7 @@ def scientific_name(ctx: click.Context): ...
     required=False,
     type=str,
     default=None,
-    help="Optional subpopulation name (str), defaults to `None` (str)",
+    help="Optional subpopulation name, defaults to `None`",
 )
 @click.option(
     "-i",
@@ -1684,7 +1680,7 @@ def scientific_name(ctx: click.Context): ...
     required=False,
     type=str,
     default=None,
-    help="Optional infraspecific taxon name (str), defaults to `None`",
+    help="Optional infraspecific taxon name, defaults to `None`",
 )
 @click.option("-e", "--species-name", required=True, type=str, help="Species name")
 @click.option("-g", "--genus-name", required=True, type=str, help="Genus name")
@@ -1696,7 +1692,7 @@ def get_taxa_scientific_name_assessments(
     infra_name: str,
     subpopulation_name: str,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -1724,7 +1720,7 @@ def kingdom(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_taxa_kingdom(ctx: click.Context, debug: bool) -> str:
+def get_taxa_kingdom(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_taxa_kingdom().json
     click.echo(json.dumps(res_json, indent=4))
@@ -1745,7 +1741,7 @@ def get_taxa_kingdom(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=int,
     default=None,
-    help="Optional geographical assessment scope, defaults to `None` (int)",
+    help="Optional geographical assessment scope, defaults to `None`",
 )
 @click.option(
     "--latest",
@@ -1759,7 +1755,7 @@ def get_taxa_kingdom(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=str,
     default=None,
-    help="Optional publication year number, defaults to `None` (int)",
+    help="Optional publication year number, defaults to `None`",
 )
 @click.option(
     "-p",
@@ -1767,7 +1763,7 @@ def get_taxa_kingdom(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=str,
     default=None,
-    help="Optional page number in the response JSON, defaults to `None` (int)",
+    help="Optional page number in the response JSON, defaults to `None`",
 )
 @click.option("-k", "--kingdom-name", required=True, type=str, help="Kingdom name")
 @click.pass_context
@@ -1779,7 +1775,7 @@ def get_taxa_kingdom_assessments(
     latest: bool,
     scope_code: str,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -1808,7 +1804,7 @@ def phylum(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_taxa_phylum(ctx: click.Context, debug: bool) -> str:
+def get_taxa_phylum(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_taxa_phylum().json
     click.echo(json.dumps(res_json, indent=4))
@@ -1829,7 +1825,7 @@ def get_taxa_phylum(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=int,
     default=None,
-    help="Optional geographical assessment scope, defaults to `None` (int)",
+    help="Optional geographical assessment scope, defaults to `None`",
 )
 @click.option(
     "--latest",
@@ -1843,7 +1839,7 @@ def get_taxa_phylum(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=str,
     default=None,
-    help="Optional publication year number, defaults to `None` (int)",
+    help="Optional publication year number, defaults to `None`",
 )
 @click.option("-m", "--phylum-name", required=True, type=str, help="Phylum name")
 @click.pass_context
@@ -1854,7 +1850,7 @@ def get_taxa_phylum_assessments(
     latest: bool,
     scope_code: str,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -1882,7 +1878,7 @@ def class_(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_taxa_class(ctx: click.Context, debug: bool) -> str:
+def get_taxa_class(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_taxa_class().json
     click.echo(json.dumps(res_json, indent=4))
@@ -1903,7 +1899,7 @@ def get_taxa_class(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=int,
     default=None,
-    help="Optional geographical assessment scope, defaults to `None` (int)",
+    help="Optional geographical assessment scope, defaults to `None`",
 )
 @click.option(
     "--latest",
@@ -1917,7 +1913,7 @@ def get_taxa_class(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=str,
     default=None,
-    help="Optional publication year number, defaults to `None` (int)",
+    help="Optional publication year number, defaults to `None`",
 )
 @click.option("-l", "--class-name", required=True, type=str, help="Class name")
 @click.pass_context
@@ -1928,7 +1924,7 @@ def get_taxa_class_assessments(
     latest: bool,
     scope_code: str,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -1956,7 +1952,7 @@ def order(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_taxa_order(ctx: click.Context, debug: bool) -> str:
+def get_taxa_order(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_taxa_order().json
     click.echo(json.dumps(res_json, indent=4))
@@ -1977,7 +1973,7 @@ def get_taxa_order(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=int,
     default=None,
-    help="Optional geographical assessment scope, defaults to `None` (int)",
+    help="Optional geographical assessment scope, defaults to `None`",
 )
 @click.option(
     "--latest",
@@ -1991,7 +1987,7 @@ def get_taxa_order(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=str,
     default=None,
-    help="Optional publication year number, defaults to `None` (int)",
+    help="Optional publication year number, defaults to `None`",
 )
 @click.option("-o", "--order-name", required=True, type=str, help="Phylum name")
 @click.pass_context
@@ -2002,7 +1998,7 @@ def get_taxa_order_assessments(
     latest: bool,
     scope_code: str,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -2030,7 +2026,7 @@ def family(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_taxa_family(ctx: click.Context, debug: bool) -> str:
+def get_taxa_family(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_taxa_family().json
     click.echo(json.dumps(res_json, indent=4))
@@ -2051,7 +2047,7 @@ def get_taxa_family(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=int,
     default=None,
-    help="Optional geographical assessment scope, defaults to `None` (int)",
+    help="Optional geographical assessment scope, defaults to `None`",
 )
 @click.option(
     "--latest",
@@ -2065,7 +2061,7 @@ def get_taxa_family(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=str,
     default=None,
-    help="Optional publication year number, defaults to `None` (int)",
+    help="Optional publication year number, defaults to `None`",
 )
 @click.option("-f", "--family-name", required=True, type=str, help="Family name")
 @click.pass_context
@@ -2076,7 +2072,7 @@ def get_taxa_family_assessments(
     latest: bool,
     scope_code: str,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -2099,7 +2095,7 @@ def get_taxa_family_assessments(
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_taxa_possibly_extinct(ctx: click.Context, debug: bool) -> str:
+def get_taxa_possibly_extinct(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_taxa_possibly_extinct().json
     click.echo(json.dumps(res_json, indent=4))
@@ -2116,7 +2112,7 @@ def get_taxa_possibly_extinct(ctx: click.Context, debug: bool) -> str:
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_taxa_possibly_extinct_in_the_wild(ctx: click.Context, debug: bool) -> str:
+def get_taxa_possibly_extinct_in_the_wild(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_taxa_possibly_extinct_in_the_wild().json
     click.echo(json.dumps(res_json, indent=4))
@@ -2125,7 +2121,7 @@ def get_taxa_possibly_extinct_in_the_wild(ctx: click.Context, debug: bool) -> st
 # ---------------------------------------------------------------------------#
 # --- Threats command group -------------------------------------------------#
 # ---------------------------------------------------------------------------#
-@redlist_cli.group("threats", help="Species threat factors data")
+@redlist_cli.group("threats", help="Species threat factors")
 @click.pass_context
 def threats(ctx: click.Context): ...
 
@@ -2138,7 +2134,7 @@ def threats(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_threats(ctx: click.Context, debug: bool) -> str:
+def get_threats(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_threats().json
     click.echo(json.dumps(res_json, indent=4))
@@ -2160,7 +2156,7 @@ def get_threats(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=int,
     default=None,
-    help="Optional geographical assessment scope, defaults to `None` (int)",
+    help="Optional geographical assessment scope, defaults to `None`",
 )
 @click.option(
     "--possibly-extinct-in-the-wild",
@@ -2186,7 +2182,7 @@ def get_threats(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=str,
     default=None,
-    help="Optional publication year number, defaults to `None` (int)",
+    help="Optional publication year number, defaults to `None`",
 )
 @click.option(
     "-p",
@@ -2194,9 +2190,9 @@ def get_threats(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=str,
     default=None,
-    help="Optional page number in the response JSON, defaults to `None` (int)",
+    help="Optional page number in the response JSON, defaults to `None`",
 )
-@click.option("-t", "--threat-code", required=True, type=str, help="Threat code (str)")
+@click.option("-t", "--threat-code", required=True, type=str, help="Threat code")
 @click.pass_context
 def get_threat_assessments(
     ctx: click.Context,
@@ -2208,7 +2204,7 @@ def get_threat_assessments(
     possibly_extinct_in_the_wild: bool,
     scope_code: int,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
@@ -2229,7 +2225,7 @@ def get_threat_assessments(
 # ---------------------------------------------------------------------------#
 # --- Use and trade command group -------------------------------------------#
 # ---------------------------------------------------------------------------#
-@redlist_cli.group("use-and-trade", help="Species use and trade factors data")
+@redlist_cli.group("use-and-trade", help="Species use and trade factors")
 @click.pass_context
 def use_and_trade(ctx: click.Context): ...
 
@@ -2242,7 +2238,7 @@ def use_and_trade(ctx: click.Context): ...
     help="Debug mode for the request and the response",
 )
 @click.pass_context
-def get_use_and_trade(ctx: click.Context, debug: bool) -> str:
+def get_use_and_trade(ctx: click.Context, debug: bool):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = ctx.obj["api_client"].get_use_and_trade().json
     click.echo(json.dumps(res_json, indent=4))
@@ -2264,7 +2260,7 @@ def get_use_and_trade(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=int,
     default=None,
-    help="Optional geographical assessment scope, defaults to `None` (int)",
+    help="Optional geographical assessment scope, defaults to `None`",
 )
 @click.option(
     "--possibly-extinct-in-the-wild",
@@ -2290,7 +2286,7 @@ def get_use_and_trade(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=str,
     default=None,
-    help="Optional publication year number, defaults to `None` (int)",
+    help="Optional publication year number, defaults to `None`",
 )
 @click.option(
     "-p",
@@ -2298,14 +2294,14 @@ def get_use_and_trade(ctx: click.Context, debug: bool) -> str:
     required=False,
     type=str,
     default=None,
-    help="Optional page number in the response JSON, defaults to `None` (int)",
+    help="Optional page number in the response JSON, defaults to `None`",
 )
 @click.option(
     "-u",
     "--use-and-trade-code",
     required=True,
     type=str,
-    help="Use and trade code (str)",
+    help="Use and trade code",
 )
 @click.pass_context
 def get_use_and_trade_assessments(
@@ -2318,7 +2314,7 @@ def get_use_and_trade_assessments(
     possibly_extinct_in_the_wild: bool,
     scope_code: int,
     debug: bool,
-) -> str:
+):
     ctx.obj["api_client"].debug_mode = ctx.obj["debug"] or debug
     res_json = (
         ctx.obj["api_client"]
