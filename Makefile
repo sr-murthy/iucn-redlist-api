@@ -63,6 +63,8 @@ wheel: clean
 all: clean
 	@echo "$(PACKAGE_NAME)[$(BRANCH)@$(HEAD)]: Building source distribution + wheel"
 	uv run hatchling build --clean
+	tar tvf ./dist/*.tar.gz
+	tar tvf ./dist/*.whl
 
 # Pre-commit
 .PHONY: pre-commit
