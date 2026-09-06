@@ -4,7 +4,7 @@ There is a comprehensive <a href="https://api.iucnredlist.org/api-docs/index.htm
 
 ## Client
 
-The client methods are fully documented in the [API client reference](reference/api-client-reference), with example snippets. A more detailed client usage guide may be added at some point in the future.
+The client methods are fully documented in the [API Client Reference](api-client-reference), with example snippets. A more detailed client usage guide may be added at some point in the future.
 
 An equivalent, but easier way of using `iucn-redlist-api` may be as a command line tool. This is described in more detail below.
 
@@ -17,6 +17,7 @@ An equivalent, but easier way of using `iucn-redlist-api` may be as a command li
 The `redlist-cli` becomes available when the project is installed as a package, i.e. from PyPI, [non-editable mode](getting-started#non-editable-installation) or [editable mode](getting-started#editable-installation) mode, as described above.
 
 !!! note
+
     You don't need an editable installation, unless you wish to evaluate and contribute changes via pull requests (PR)s.
 
 All commands make [API](https://api.iucnredlist.org/api-docs/index.html) requests, and require the API key to be available in the environment, which can be done by setting an `API_KEY` environment variable, e.g. a simple command line export in Linux / MacOS:

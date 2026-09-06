@@ -1,4 +1,4 @@
-# IUCN Red List of Threatened Species API - Python Client and CLI
+# IUCN Red List of Threatened Species API - Python Client & CLI
 
 `iucn-redlist-api` is a simple, easy-to-use Python client and command line interface (CLI) for the <a href="https://iucn.org/" target="_new">International Union for Conservation of Nature and Natural Resources (IUCN)</a> <a href="https://www.iucnredlist.org/" target="_new">Red List of Threatened Species</a> <a href="https://api.iucnredlist.org/" target="_new">API</a>.
 
@@ -9,6 +9,6 @@ The latest version of the API is **v4**, and the reference is published <a href=
 The [Python package](https://pypi.org/project/iucn-redlist-api/) is currently at `v0.3.0`.
 
 !!! note
-    This project is not officially associated with the IUCN in any way, but the implementation faithfully follows the published Red List API reference, and will be maintained in accordance with any changes in the API. Contributors and contributions are welcome - see the [contributing page](contributing) if you're interested.
+    This project is not officially associated with the IUCN in any way, but the implementation faithfully follows the published Red List API reference, and will be maintained in accordance with any changes in the API. Contributors and contributions are welcome - see the [Contributing](contributing) page if you're interested.
 
 See the [Getting Started](getting-started) guide to get started.
