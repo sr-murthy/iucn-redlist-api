@@ -410,6 +410,50 @@ The command for possibly extinct in the wild status is almost identical:
 redlist-cli taxa possibly-extinct-in-the-wild
 ```
 
+#### Country Assessments
+
+Getting all available assessments for Australia 🇦🇺 published in 20205 that contain species indications of possibly extinct status:
+```shell
+redlist-cli countries get-assessments --country-code AU --year-published 2025 --possibly-extinc
+{
+    "country": {
+        "description": {
+            "en": "Australia"
+        },
+        "code": "AU"
+    },
+    "assessments": [
+        {
+            "assessment_date": "2023-06-01T01:00:00.000+01:00",
+            "year_published": "2025",
+            "latest": true,
+            "possibly_extinct": true,
+            "possibly_extinct_in_the_wild": false,
+            "sis_taxon_id": 221324039,
+            "criteria": "B1ab(iii)+2ab(iii)",
+            "url": "https://www.iucnredlist.org/species/221324039/235751186",
+            "taxon_scientific_name": "Tympanocryptis mccartneyi",
+            "red_list_category_code": "CR",
+            "assessment_id": 235751186,
+            "code": "AU",
+            "code_type": "country",
+            "scopes": [
+                {
+                    "description": {
+                        "en": "Global"
+                    },
+                    "code": "1"
+                }
+            ]
+        }
+    ],
+    "filters": {
+        "year_published": "2025",
+        "possibly_extinct": "True"
+    }
+}
+```
+
 #### Green (Recovery and Conservation) Status of Species
 
 Getting all available green status assessments of species:
@@ -446,29 +490,31 @@ redlist-cli green-status get-all
 }
 ```
 
-### A Note on Data Capture and Export
+#### A Note on Data Capture and Export
 
 The JSON response streams in the CLI console output can be captured quickly in Linux/MacOS/WSL by redirection to file, e.g.
 ```shell
 redlist-cli green-status get-all > ./green-status.json
 ```
 
-Depending on your requirements, the JSON data can then be exported to other formats such as CSV or Excel. If you're comfortable on the command line with JSON parsing tools such as [`jq`](https://jqlang.org/) you can also do this directly, with the additional use of Python and [Pandas](https://pandas.pydata.org), e.g. to CSV:
+Depending on your requirements, the JSON data can then be exported to other formats such as CSV or Excel. If you're comfortable on the command line with JSON stream parsing tools such as [`jq`](https://jqlang.org/) you can also do this directly, with the additional use of Python and [Pandas](https://pandas.pydata.org), e.g. to CSV:
 ```shell
-redlist-cli taxa possibly-extinct-in-the-wild | jq '.["assessments"]' > possibly-ew.json && python3 -c "import pandas as pd; pd.read_json('./possibly-ew.json').to_csv('./possibly-ew.csv', index=False)"
+redlist-cli taxa possibly-extinct-in-the-wild | jq '.["assessments"]' > possibly-ew.json && \
+python3 -c "import pandas as pd; pd.read_json('./possibly-ew.json').to_csv('./possibly-ew.csv', index=False)"
 ```
 and Excel:
 ```shell
-redlist-cli taxa possibly-extinct-in-the-wild | jq '.["assessments"]' > possibly-ew.json && python3 -c "import pandas as pd; pd.read_json('./possibly-ew.json').to_excel('./possibly-ew.xlsx', index=True)"
+redlist-cli taxa possibly-extinct-in-the-wild | jq '.["assessments"]' > possibly-ew.json && \
+python3 -c "import pandas as pd; pd.read_json('./possibly-ew.json').to_excel('./possibly-ew.xlsx', index=True)"
 ```
 
 !!! note
 
     The Excel example requires [`openpyxl`](https://pypi.org/project/openpyxl/) to be installed in the working environment, and both examples require `jq` and Pandas.
 
-You can also of course capture the JSON streams manually by copying them directly into files.
+You can also of course capture the response JSON streams manually by copying them directly into files, and using other applications to manually export the data into the desired formats.
 
-### Debug Mode
+#### Debug Mode
 
 There is a global debug mode flag (defaulting to `False`) you can set for `redlist-cli`, which can also be overridden in the request-level commands, e.g.:
 ```shell

@@ -28,20 +28,20 @@ clean:
 	rm -fr docs/_build/* .pytest_cache *.pyc *__pycache__* ./dist/* ./build/* *.egg-info*
 
 # A simple version check for the installed package (local, sdist or wheel)
-version_check:
+version-check:
 	@echo "\n$(PACKAGE_NAME)[$(BRANCH)@$(HEAD)]: Checking installed package version (if it is installed)\n"
 	python3 -c "import os; os.chdir('src/iucn_redlist_api'); from __init__ import __version__; print(__version__); os.chdir('../')"
 
-version_extract:
+version-extract:
 	echo "$(PACKAGE_VERSION)"
 
 # Dependency management
-sync_deps_exact:
+sync-deps-exact:
 	@echo "\n$(PACKAGE_NAME)[$(BRANCH)@$(HEAD)]: Syncing all package + development dependencies, exactly in line with the UV lockfile\n"
 	rm -f uv.lock && \
 	uv sync --verbose --active --all-groups --no-install-project --no-cache --refresh
 
-sync_deps_inexact:
+sync-deps-inexact:
 	@echo "\n$(PACKAGE_NAME)[$(BRANCH)@$(HEAD)]: Syncing all package + development dependencies, preserving pre-existing dependencies\n"
 	rm -f uv.lock && \
 	uv sync --verbose --active --all-groups --no-install-project --no-cache --refresh --inexact

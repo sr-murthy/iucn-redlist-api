@@ -24,6 +24,7 @@ jobs:
       PYTHONDEVMODE: 1
       API_KEY: ${{ secrets.IUCN_RED_LIST_API_KEY }}
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
     strategy:
       fail-fast: false
       max-parallel: 1
@@ -51,7 +52,7 @@ jobs:
 
     - name: Install project dependencies
       run: |
-        make sync_deps_exact
+        make sync-deps-exact
 
     - name: Run unit tests + Measure code coverage
       run: |
