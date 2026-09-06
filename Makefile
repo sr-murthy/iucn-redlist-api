@@ -16,7 +16,7 @@ DOCS_BUILD := $(PROJECT_ROOT)/site
 
 # Git
 git_stage:
-	@echo "\n$(PACKAGE_NAME)[$(BRANCH)@$(HEAD)]: Staging new, modified, deleted and/or renamed files in Git\n"
+	@echo "$(PACKAGE_NAME)[$(BRANCH)@$(HEAD)]: Staging new, modified, deleted and/or renamed files in Git"
 	git status -uno | grep modified | tr -s ' ' | cut -d ' ' -f 2 | xargs git add && \
 	git status -uno | grep deleted | tr -s ' ' | cut -d ' ' -f 2 | xargs git add -A && \
 	git status -uno
@@ -24,12 +24,12 @@ git_stage:
 # Housekeeping
 .PHONY: clean
 clean:
-	@echo "\n$(PACKAGE_NAME)[$(BRANCH)@$(HEAD)]: Deleting all temporary files\n"
+	@echo "$(PACKAGE_NAME)[$(BRANCH)@$(HEAD)]: Deleting all temporary files"
 	rm -fr docs/_build/* .pytest_cache *.pyc *__pycache__* ./dist/* ./build/* *.egg-info*
 
 # A simple version check for the installed package (local, sdist or wheel)
 version-check:
-	@echo "\n$(PACKAGE_NAME)[$(BRANCH)@$(HEAD)]: Checking installed package version (if it is installed)\n"
+	@echo "$(PACKAGE_NAME)[$(BRANCH)@$(HEAD)]: Checking installed package version (if it is installed)"
 	python3 -c "import os; os.chdir('src/iucn_redlist_api'); from __init__ import __version__; print(__version__); os.chdir('../')"
 
 version-extract:
@@ -37,30 +37,49 @@ version-extract:
 
 # Dependency management
 sync-deps-exact:
-	@echo "\n$(PACKAGE_NAME)[$(BRANCH)@$(HEAD)]: Syncing all package + development dependencies, exactly in line with the UV lockfile\n"
+	@echo "$(PACKAGE_NAME)[$(BRANCH)@$(HEAD)]: Syncing all package + development dependencies, exactly in line with the UV lockfile"
 	rm -f uv.lock && \
 	uv sync --verbose --active --all-groups --no-install-project --no-cache --refresh
 
 sync-deps-inexact:
-	@echo "\n$(PACKAGE_NAME)[$(BRANCH)@$(HEAD)]: Syncing all package + development dependencies, preserving pre-existing dependencies\n"
+	@echo "$(PACKAGE_NAME)[$(BRANCH)@$(HEAD)]: Syncing all package + development dependencies, preserving pre-existing dependencies"
 	rm -f uv.lock && \
 	uv sync --verbose --active --all-groups --no-install-project --no-cache --refresh --inexact
+
+# --- Package artifacts ---
+.PHONY: sdist
+sdist: clean
+	@echo "$(PACKAGE_NAME)[$(BRANCH)@$(HEAD)]: Building source distribution"
+	uv run hatchling build --target sdist --clean
+	tar tvf ./dist/*.tar.gz
+
+.PHONY: wheel
+wheel: clean
+	@echo "$(PACKAGE_NAME)[$(BRANCH)@$(HEAD)]: Building wheel"
+	uv run hatchling build --target wheel --clean
+	tar tvf ./dist/*.whl
+
+.PHONY: all
+all: clean
+	@echo "$(PACKAGE_NAME)[$(BRANCH)@$(HEAD)]: Building source distribution + wheel"
+	uv run hatchling build --clean
 
 # Pre-commit
 .PHONY: pre-commit
 pre-commit: clean
-	@echo "\n$(PACKAGE_NAME)[$(BRANCH)@$(HEAD)]: Running pre-commit hooks\n"
+	@echo "$(PACKAGE_NAME)[$(BRANCH)@$(HEAD)]: Running pre-commit hooks"
 	pre-commit run --all-files
 
-# Running tests (NOTE: all tests require the API_KEY environment variable)
+# Doctests - requires API key (`API_KEY`) to be available in the environment
 .PHONY: doctest
 doctest: clean
-	@echo "\n$(PACKAGE_NAME)[$(BRANCH)@$(HEAD)]: Running doctests in all core libraries\n"
+	@echo "$(PACKAGE_NAME)[$(BRANCH)@$(HEAD)]: Running doctests in all core libraries"
 	PYTHONPATH="src" uv run --active python3 -m doctest -v src/iucn_redlist_api/*.py
 
+# Unit tests
 .PHONY: test
 test: clean
-	@echo "\n$(PACKAGE_NAME)[$(BRANCH)@$(HEAD)]: Running package unit tests + measuring coverage\n"
+	@echo "$(PACKAGE_NAME)[$(BRANCH)@$(HEAD)]: Running package unit tests + measuring coverage"
 	PYTHONPATH="src" uv run --active pytest \
 			                         --cache-clear \
 				                     --capture=no \
