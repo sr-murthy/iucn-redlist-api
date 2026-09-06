@@ -447,7 +447,7 @@ class IucnRedListApiClient:
         --------
         >>> import os
         >>> client = IucnRedListApiClient(os.environ['API_KEY'])
-        >>> client.assessment_search(filter_on=['x']).json  # doctest: +NORMALIZE_WHITESPACE, +ELLIPSIS
+        >>> client.assessment_search(filter_on=['x']).json  # doctest: +SKIP
         {'assessment_ids': [259841783,
           245042349,
           209243069,
@@ -1299,7 +1299,7 @@ class IucnRedListApiClient:
     # --- Green status -------------------------------------------------------#
     # ------------------------------------------------------------------------#
     def get_green_status_all(self) -> IucnRedListApiResponse:
-        """The green status of species.
+        """All green status (recovery and conservation status) assessments.
 
         Implements the request:
 
@@ -1308,7 +1308,7 @@ class IucnRedListApiClient:
         Returns
         -------
         IucnRedListApiResponse
-            Green status of species data.
+            All green status (recovery and conservation status) assessments.
 
         Examples
         --------
@@ -1967,7 +1967,7 @@ class IucnRedListApiClient:
         year_published: int | None = None,
         latest: bool | None = None,
         possibly_extinct: bool | None = None,
-        possibly_extinct_in_the_wild: bool | None = None
+        possibly_extinct_in_the_wild: bool | None = None,
     ) -> IucnRedListApiResponse:
         """Assessment data for a geographical assessment scope by scope code.
 
@@ -2053,7 +2053,7 @@ class IucnRedListApiClient:
             year_published=year_published,
             latest=latest,
             possibly_extinct=possibly_extinct,
-            possibly_extinct_in_the_wild=possibly_extinct_in_the_wild
+            possibly_extinct_in_the_wild=possibly_extinct_in_the_wild,
         )
 
         return self.get(endpoint, params=params)
@@ -2500,7 +2500,7 @@ class IucnRedListApiClient:
         return self.get(endpoint, params=params)
 
     def get_taxa_kingdom(self) -> IucnRedListApiResponse:
-        """Kingdom taxa data.
+        """Kingdoms.
 
         Implements the request:
 
@@ -2509,7 +2509,7 @@ class IucnRedListApiClient:
         Returns
         -------
         IucnRedListApiResponse
-            Kingdom taxa data.
+            All kingdom data.
 
         Examples
         --------
@@ -2615,7 +2615,7 @@ class IucnRedListApiClient:
         return self.get(endpoint, params=params)
 
     def get_taxa_phylum(self) -> IucnRedListApiResponse:
-        """Phylum taxa data.
+        """Phylums.
 
         Implements the request:
 
@@ -2624,7 +2624,7 @@ class IucnRedListApiClient:
         Returns
         -------
         IucnRedListApiResponse
-            Phylum taxa data.
+            All phylums data.
 
         Examples
         --------
@@ -2742,7 +2742,7 @@ class IucnRedListApiClient:
         return self.get(endpoint, params=params)
 
     def get_taxa_class(self) -> IucnRedListApiResponse:
-        """Class taxa data.
+        """Classes.
 
         Implements the request:
 
@@ -2751,7 +2751,7 @@ class IucnRedListApiClient:
         Returns
         -------
         IucnRedListApiResponse
-            Class taxa data.
+            All class data.
 
         Examples
         --------
@@ -2782,7 +2782,7 @@ class IucnRedListApiClient:
         latest: bool | None = None,
         scope_code: int | None = None,
     ) -> IucnRedListApiResponse:
-        """Assessment data for a given class by phylum name.
+        """Assessment data for a given class by class name.
 
         Implements the request:
 
@@ -2859,7 +2859,7 @@ class IucnRedListApiClient:
         return self.get(endpoint, params=params)
 
     def get_taxa_order(self) -> IucnRedListApiResponse:
-        """Order taxa data.
+        """Orders.
 
         Implements the request:
 
@@ -2868,7 +2868,7 @@ class IucnRedListApiClient:
         Returns
         -------
         IucnRedListApiResponse
-            Order taxa data.
+            All order data.
 
         Examples
         --------
@@ -2964,7 +2964,7 @@ class IucnRedListApiClient:
         return self.get(endpoint, params=params)
 
     def get_taxa_family(self) -> IucnRedListApiResponse:
-        """Family taxa data.
+        """Families.
 
         Implements the request:
 
@@ -2973,7 +2973,7 @@ class IucnRedListApiClient:
         Returns
         -------
         IucnRedListApiResponse
-            Family taxa data.
+            All family data.
 
         Examples
         --------

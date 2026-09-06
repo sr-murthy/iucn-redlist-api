@@ -11,9 +11,8 @@ PROJECT_ROOT := $(PWD)
 
 TESTS_ROOT := $(PROJECT_ROOT)/tests
 
-#DOCS_ROOT := $(PROJECT_ROOT)/docs
-#DOCS_BUILD := $(DOCS_ROOT)/_build
-#DOCS_BUILD_HTML := $(DOCS_ROOT)/_build/html
+DOCS_ROOT := $(PROJECT_ROOT)/docs
+DOCS_BUILD := $(PROJECT_ROOT)/site
 
 # Git
 git_stage:

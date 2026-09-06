@@ -66,9 +66,9 @@ Now import the library in exactly the same way as with the non-editable installa
 
 In the editable installation local changes to the source files (in `src/iucn_redlist_api/`) are reflected in the installed library functionality. This is the best option if you wish to contribute to the project via pull requests.
 
-### Use from Source
+### From Source
 
-You can also use the client library directly from source in a Python interpreter, with only the project dependencies - not the project itself - installed into the working environment, for example, with `uv` using a variant of the command above with the addition of the `--no-install-project` flag, e.g.:
+The client can be used directly from source in a Python shell, with only the project dependencies - not the project itself - installed into the working environment, for example, with `uv` using a variant of the command above with the addition of the `--no-install-project` flag, e.g.:
 ```shell
 uv sync --active --verbose --all-groups --no-install-project --no-cache --refresh --inexact
 ```
@@ -80,9 +80,3 @@ Accessing the client works exactly the same way as described above, except that 
 >>> client
 IucnRedListApiClient(api_version="v4", debug=False)
 ```
-
-## Using the API Client
-
-There is a comprehensive [Red List API reference](https://api.iucnredlist.org/api-docs/index.html) that can be consulted to understand the API itself, and the `iucn-redlist-api` is a very thin client around this API, with a public method for every API endpoint. The API client methods are fully documented in the [API client reference](api-client-reference), with example snippets.
-
-A more detailed client usage guide will be added at some point in the future.
