@@ -15,7 +15,7 @@ DOCS_ROOT := $(PROJECT_ROOT)/docs
 DOCS_BUILD := $(PROJECT_ROOT)/site
 
 # Git
-git_stage:
+git-stage:
 	@echo "$(PACKAGE_NAME)[$(BRANCH)@$(HEAD)]: Staging new, modified, deleted and/or renamed files in Git"
 	git status -uno | grep modified | tr -s ' ' | cut -d ' ' -f 2 | xargs git add && \
 	git status -uno | grep deleted | tr -s ' ' | cut -d ' ' -f 2 | xargs git add -A && \
