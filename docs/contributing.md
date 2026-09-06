@@ -1,8 +1,8 @@
 # Contributing
 
-Contributors and contributions are welcome, especially from people with more expert knowledge and experience in wildlife conservation and biodiversity, and especially from the <a href="https://iucn.org" target="_blank" title="IUCN">IUCN</a> or <a href="https://www.iucnredlist.org" target="_blank" title="IUCN Red List">IUCN Red List</a>.
+Contributors and contributions are welcome, especially from people with more expert knowledge and experience in wildlife conservation and biodiversity, including <a href="https://iucn.org" target="_blank" title="IUCN">IUCN</a> or <a href="https://www.iucnredlist.org" target="_blank" title="IUCN Red List">IUCN Red List</a>.
 
-Contributions are not limited to code, but can include bug reports and feature requests.
+Contributions are not limited to code, but can include bug reports, feature requests, and suggestions.
 
 The basic process for code contributions is fairly simple:
 
