@@ -301,7 +301,7 @@ class IucnRedListApiClient:
         if not params:
             return {}
 
-        return {key: val for key, val in params.items() if val}
+        return {key: val for key, val in params.items() if val not in (None, [], ())}
 
     def get(
         self, endpoint: str, /, *, params: dict[str, typing.Any] | None = None
@@ -428,7 +428,7 @@ class IucnRedListApiClient:
         return self.get(endpoint)
 
     def assessment_search(
-        self, filter_on: str | list[str], page: int | None = None
+        self, filter_on: str | list[str] | tuple[str], page: int | None = None
     ) -> IucnRedListApiResponse:
         """Assessment data based on a search with optional search criteria.
 
