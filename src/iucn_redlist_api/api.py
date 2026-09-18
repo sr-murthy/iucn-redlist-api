@@ -130,6 +130,7 @@ class IucnRedListApiClient:
     # All instances have these private attributes from the start.
     _api_session: IucnRedListApiSession
     _debug_mode: bool = False
+    _request_timeout: int = 5
 
     def _toggle_logging(self, debug_mode: bool) -> bool:
         """Toggles logging based on the client-set debug mode appropriately.
@@ -368,7 +369,9 @@ class IucnRedListApiClient:
             self._logger.debug(f"Requesting URL: {url}")
 
         try:
-            res = IucnRedListApiResponse(self.api_session.get(url))
+            res = IucnRedListApiResponse(
+                self.api_session.get(url, timeout=self._request_timeout)
+            )
         except requests.RequestException as e:
             raise IucnRedListApiRequestException(e)
 
