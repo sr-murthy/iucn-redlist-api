@@ -2505,6 +2505,8 @@ class IucnRedListApiClient:
         params = self._filter_params(
             genus_name=genus_name,
             species_name=species_name,
+            infra_name=infra_name,
+            subpopulation_name=subpopulation_name,
         )
 
         return self.get(endpoint, params=params)

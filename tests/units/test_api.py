@@ -580,13 +580,18 @@ class TestIucnRedListApiClient(_TestIucnRedListApi):
             "iucn_redlist_api.api.IucnRedListApiClient.get"
         ) as mock_client_get:
             test_client.get_taxa_scientific_name_assessments(
-                "test_genus_name", "test_species_name"
+                "test_genus_name",
+                "test_species_name",
+                infra_name="test_infra_name",
+                subpopulation_name="test_subpopulation_name",
             )
             mock_client_get.assert_called_with(
                 "taxa/scientific_name",
                 params={
                     "genus_name": "test_genus_name",
                     "species_name": "test_species_name",
+                    "infra_name": "test_infra_name",
+                    "subpopulation_name": "test_subpopulation_name",
                 },
             )
 
