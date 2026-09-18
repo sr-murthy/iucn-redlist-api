@@ -77,126 +77,154 @@ class TestIucnRedListApiClient(_TestIucnRedListApi):
         ) as mock_client_session:
             # Assessments
             test_client.get("assessment/test_id")
-            mock_client_session.get.assert_called_with(f"{BASEURL}/assessment/test_id")
+            mock_client_session.get.assert_called_with(
+                f"{BASEURL}/assessment/test_id", timeout=5
+            )
 
             # Biogeographical realms
             test_client.get("biogeographical_realms")
             mock_client_session.get.assert_called_with(
-                f"{BASEURL}/biogeographical_realms"
+                f"{BASEURL}/biogeographical_realms", timeout=5
             )
             test_client.get("biogeographical_realms/test_code")
             mock_client_session.get.assert_called_with(
-                f"{BASEURL}/biogeographical_realms/test_code"
+                f"{BASEURL}/biogeographical_realms/test_code", timeout=5
             )
 
             # Comprehensive groups
             test_client.get("comprehensive_groups")
             mock_client_session.get.assert_called_with(
-                f"{BASEURL}/comprehensive_groups"
+                f"{BASEURL}/comprehensive_groups", timeout=5
             )
             test_client.get("comprehensive_groups/test_code")
             mock_client_session.get.assert_called_with(
-                f"{BASEURL}/comprehensive_groups/test_code"
+                f"{BASEURL}/comprehensive_groups/test_code", timeout=5
             )
 
             # Conservation actions
             test_client.get("conservation_actions")
             mock_client_session.get.assert_called_with(
-                f"{BASEURL}/conservation_actions"
+                f"{BASEURL}/conservation_actions", timeout=5
             )
             test_client.get("conservation_actions/test_code")
             mock_client_session.get.assert_called_with(
-                f"{BASEURL}/conservation_actions/test_code"
+                f"{BASEURL}/conservation_actions/test_code", timeout=5
             )
 
             # Countries
             test_client.get("countries")
-            mock_client_session.get.assert_called_with(f"{BASEURL}/countries")
+            mock_client_session.get.assert_called_with(
+                f"{BASEURL}/countries", timeout=5
+            )
             test_client.get("countries/test_code")
-            mock_client_session.get.assert_called_with(f"{BASEURL}/countries/test_code")
+            mock_client_session.get.assert_called_with(
+                f"{BASEURL}/countries/test_code", timeout=5
+            )
 
             # FAOs
             test_client.get("faos")
-            mock_client_session.get.assert_called_with(f"{BASEURL}/faos")
+            mock_client_session.get.assert_called_with(f"{BASEURL}/faos", timeout=5)
             test_client.get("faos/test_code")
-            mock_client_session.get.assert_called_with(f"{BASEURL}/faos/test_code")
+            mock_client_session.get.assert_called_with(
+                f"{BASEURL}/faos/test_code", timeout=5
+            )
 
             # Growth forms
             test_client.get("growth_forms")
-            mock_client_session.get.assert_called_with(f"{BASEURL}/growth_forms")
+            mock_client_session.get.assert_called_with(
+                f"{BASEURL}/growth_forms", timeout=5
+            )
             test_client.get("growth_forms/test_code")
             mock_client_session.get.assert_called_with(
-                f"{BASEURL}/growth_forms/test_code"
+                f"{BASEURL}/growth_forms/test_code", timeout=5
             )
 
             # Green status
             test_client.get("green_status/all")
-            mock_client_session.get.assert_called_with(f"{BASEURL}/green_status/all")
+            mock_client_session.get.assert_called_with(
+                f"{BASEURL}/green_status/all", timeout=5
+            )
 
             # Habitat
             test_client.get("habitats")
-            mock_client_session.get.assert_called_with(f"{BASEURL}/habitats")
+            mock_client_session.get.assert_called_with(f"{BASEURL}/habitats", timeout=5)
             test_client.get("habitats/test_code")
-            mock_client_session.get.assert_called_with(f"{BASEURL}/habitats/test_code")
+            mock_client_session.get.assert_called_with(
+                f"{BASEURL}/habitats/test_code", timeout=5
+            )
 
             # Information
             test_client.get("information/api_version")
             mock_client_session.get.assert_called_with(
-                f"{BASEURL}/information/api_version"
+                f"{BASEURL}/information/api_version", timeout=5
             )
             test_client.get("information/red_list_version")
             mock_client_session.get.assert_called_with(
-                f"{BASEURL}/information/red_list_version"
+                f"{BASEURL}/information/red_list_version", timeout=5
             )
 
             # Population trends
             test_client.get("population_trends")
-            mock_client_session.get.assert_called_with(f"{BASEURL}/population_trends")
+            mock_client_session.get.assert_called_with(
+                f"{BASEURL}/population_trends", timeout=5
+            )
             test_client.get("population_trends/test_code")
             mock_client_session.get.assert_called_with(
-                f"{BASEURL}/population_trends/test_code"
+                f"{BASEURL}/population_trends/test_code", timeout=5
             )
 
             # Red List categories
             test_client.get("red_list_categories")
-            mock_client_session.get.assert_called_with(f"{BASEURL}/red_list_categories")
+            mock_client_session.get.assert_called_with(
+                f"{BASEURL}/red_list_categories", timeout=5
+            )
             test_client.get("red_list_categories/test_code")
             mock_client_session.get.assert_called_with(
-                f"{BASEURL}/red_list_categories/test_code"
+                f"{BASEURL}/red_list_categories/test_code", timeout=5
             )
 
             # Research
             test_client.get("research")
-            mock_client_session.get.assert_called_with(f"{BASEURL}/research")
+            mock_client_session.get.assert_called_with(f"{BASEURL}/research", timeout=5)
             test_client.get("research/test_code")
-            mock_client_session.get.assert_called_with(f"{BASEURL}/research/test_code")
+            mock_client_session.get.assert_called_with(
+                f"{BASEURL}/research/test_code", timeout=5
+            )
 
             # Scopes
             test_client.get("scopes")
-            mock_client_session.get.assert_called_with(f"{BASEURL}/scopes")
+            mock_client_session.get.assert_called_with(f"{BASEURL}/scopes", timeout=5)
             test_client.get("scopes/test_code")
-            mock_client_session.get.assert_called_with(f"{BASEURL}/scopes/test_code")
+            mock_client_session.get.assert_called_with(
+                f"{BASEURL}/scopes/test_code", timeout=5
+            )
 
             # Statistics
             test_client.get("statistics/count")
-            mock_client_session.get.assert_called_with(f"{BASEURL}/statistics/count")
+            mock_client_session.get.assert_called_with(
+                f"{BASEURL}/statistics/count", timeout=5
+            )
 
             # Stresses
             test_client.get("stresses")
-            mock_client_session.get.assert_called_with(f"{BASEURL}/stresses")
+            mock_client_session.get.assert_called_with(f"{BASEURL}/stresses", timeout=5)
             test_client.get("stresses/test_code")
-            mock_client_session.get.assert_called_with(f"{BASEURL}/stresses/test_code")
+            mock_client_session.get.assert_called_with(
+                f"{BASEURL}/stresses/test_code", timeout=5
+            )
 
             # Systems
             test_client.get("systems")
-            mock_client_session.get.assert_called_with(f"{BASEURL}/systems")
+            mock_client_session.get.assert_called_with(f"{BASEURL}/systems", timeout=5)
             test_client.get("systems/test_code")
-            mock_client_session.get.assert_called_with(f"{BASEURL}/systems/test_code")
+            mock_client_session.get.assert_called_with(
+                f"{BASEURL}/systems/test_code", timeout=5
+            )
 
             # Taxa - SIS by SIS code
             test_client.get("taxa/sis/test_sis_code")
             mock_client_session.get.assert_called_with(
-                f"{BASEURL}/taxa/sis/test_sis_code"
+                f"{BASEURL}/taxa/sis/test_sis_code", timeout=5
             )
 
             # Taxa - Scientific name
@@ -207,85 +235,95 @@ class TestIucnRedListApiClient(_TestIucnRedListApi):
             }
             test_client.get("taxa/scientific_name", params=test_params)
             mock_client_session.get.assert_called_with(
-                f"{BASEURL}/taxa/scientific_name?{urlencode(test_params)}"
+                f"{BASEURL}/taxa/scientific_name?{urlencode(test_params)}", timeout=5
             )
 
             # Taxa - Kingdom
             test_client.get("taxa/kingdom")
-            mock_client_session.get.assert_called_with(f"{BASEURL}/taxa/kingdom")
+            mock_client_session.get.assert_called_with(
+                f"{BASEURL}/taxa/kingdom", timeout=5
+            )
             test_params = {"page": 1}
             test_client.get("taxa/kingdom/test_kingdom_name", params=test_params)
             mock_client_session.get.assert_called_with(
-                f"{BASEURL}/taxa/kingdom/test_kingdom_name?{urlencode(test_params)}"
+                f"{BASEURL}/taxa/kingdom/test_kingdom_name?{urlencode(test_params)}",
+                timeout=5,
             )
 
             # Taxa - Phylum
             test_client.get("taxa/phylum")
-            mock_client_session.get.assert_called_with(f"{BASEURL}/taxa/phylum")
-            test_params = {"page": 1}
-            test_client.get("taxa/phylum/test_phylum_name", params=test_params)
             mock_client_session.get.assert_called_with(
-                f"{BASEURL}/taxa/phylum/test_phylum_name?{urlencode(test_params)}"
+                f"{BASEURL}/taxa/phylum", timeout=5
             )
-
-            # Taxa - Phylum
-            test_client.get("taxa/phylum")
-            mock_client_session.get.assert_called_with(f"{BASEURL}/taxa/phylum")
             test_params = {"latest": True}
             test_client.get("taxa/phylum/test_phylum_name", params=test_params)
             mock_client_session.get.assert_called_with(
-                f"{BASEURL}/taxa/phylum/test_phylum_name?{urlencode(test_params)}"
+                f"{BASEURL}/taxa/phylum/test_phylum_name?{urlencode(test_params)}",
+                timeout=5,
             )
 
             # Taxa - Class
             test_client.get("taxa/class")
-            mock_client_session.get.assert_called_with(f"{BASEURL}/taxa/class")
+            mock_client_session.get.assert_called_with(
+                f"{BASEURL}/taxa/class", timeout=5
+            )
             test_params = {"latest": True}
             test_client.get("taxa/class/test_class_name", params=test_params)
             mock_client_session.get.assert_called_with(
-                f"{BASEURL}/taxa/class/test_class_name?{urlencode(test_params)}"
+                f"{BASEURL}/taxa/class/test_class_name?{urlencode(test_params)}",
+                timeout=5,
             )
 
             # Taxa - Order
             test_client.get("taxa/order")
-            mock_client_session.get.assert_called_with(f"{BASEURL}/taxa/order")
+            mock_client_session.get.assert_called_with(
+                f"{BASEURL}/taxa/order", timeout=5
+            )
             test_params = {"latest": True}
             test_client.get("taxa/order/test_order_name", params=test_params)
             mock_client_session.get.assert_called_with(
-                f"{BASEURL}/taxa/order/test_order_name?{urlencode(test_params)}"
+                f"{BASEURL}/taxa/order/test_order_name?{urlencode(test_params)}",
+                timeout=5,
             )
 
             # Taxa - Family
             test_client.get("taxa/family")
-            mock_client_session.get.assert_called_with(f"{BASEURL}/taxa/family")
+            mock_client_session.get.assert_called_with(
+                f"{BASEURL}/taxa/family", timeout=5
+            )
             test_params = {"latest": True}
             test_client.get("taxa/family/test_family_name", params=test_params)
             mock_client_session.get.assert_called_with(
-                f"{BASEURL}/taxa/family/test_family_name?{urlencode(test_params)}"
+                f"{BASEURL}/taxa/family/test_family_name?{urlencode(test_params)}",
+                timeout=5,
             )
 
             # Taxa - Extinction status
             test_client.get("taxa/possibly_extinct")
             mock_client_session.get.assert_called_with(
-                f"{BASEURL}/taxa/possibly_extinct"
+                f"{BASEURL}/taxa/possibly_extinct", timeout=5
             )
             test_client.get("taxa/possibly_extinct_in_the_wild")
             mock_client_session.get.assert_called_with(
-                f"{BASEURL}/taxa/possibly_extinct_in_the_wild"
+                f"{BASEURL}/taxa/possibly_extinct_in_the_wild", timeout=5
             )
 
             # Threats
             test_client.get("threats")
-            mock_client_session.get.assert_called_with(f"{BASEURL}/threats")
+            mock_client_session.get.assert_called_with(f"{BASEURL}/threats", timeout=5)
             test_client.get("threats/test_code")
-            mock_client_session.get.assert_called_with(f"{BASEURL}/threats/test_code")
+            mock_client_session.get.assert_called_with(
+                f"{BASEURL}/threats/test_code", timeout=5
+            )
 
             # Use and trade
             test_client.get("use_and_trade")
-            mock_client_session.get.assert_called_with(f"{BASEURL}/use_and_trade")
+            mock_client_session.get.assert_called_with(
+                f"{BASEURL}/use_and_trade", timeout=5
+            )
             test_client.get("use_and_trade/test_code")
             mock_client_session.get.assert_called_with(
-                f"{BASEURL}/use_and_trade/test_code"
+                f"{BASEURL}/use_and_trade/test_code", timeout=5
             )
 
     def test_get_assessment(self):
@@ -580,13 +618,18 @@ class TestIucnRedListApiClient(_TestIucnRedListApi):
             "iucn_redlist_api.api.IucnRedListApiClient.get"
         ) as mock_client_get:
             test_client.get_taxa_scientific_name_assessments(
-                "test_genus_name", "test_species_name"
+                "test_genus_name",
+                "test_species_name",
+                infra_name="test_infra_name",
+                subpopulation_name="test_subpopulation_name",
             )
             mock_client_get.assert_called_with(
                 "taxa/scientific_name",
                 params={
                     "genus_name": "test_genus_name",
                     "species_name": "test_species_name",
+                    "infra_name": "test_infra_name",
+                    "subpopulation_name": "test_subpopulation_name",
                 },
             )
 

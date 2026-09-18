@@ -130,6 +130,7 @@ class IucnRedListApiClient:
     # All instances have these private attributes from the start.
     _api_session: IucnRedListApiSession
     _debug_mode: bool = False
+    _request_timeout: int = 5
 
     def _toggle_logging(self, debug_mode: bool) -> bool:
         """Toggles logging based on the client-set debug mode appropriately.
@@ -301,7 +302,7 @@ class IucnRedListApiClient:
         if not params:
             return {}
 
-        return {key: val for key, val in params.items() if val}
+        return {key: val for key, val in params.items() if val not in (None, [], ())}
 
     def get(
         self, endpoint: str, /, *, params: dict[str, typing.Any] | None = None
@@ -368,7 +369,9 @@ class IucnRedListApiClient:
             self._logger.debug(f"Requesting URL: {url}")
 
         try:
-            res = IucnRedListApiResponse(self.api_session.get(url))
+            res = IucnRedListApiResponse(
+                self.api_session.get(url, timeout=self._request_timeout)
+            )
         except requests.RequestException as e:
             raise IucnRedListApiRequestException(e)
 
@@ -428,7 +431,7 @@ class IucnRedListApiClient:
         return self.get(endpoint)
 
     def assessment_search(
-        self, filter_on: str | list[str], page: int | None = None
+        self, filter_on: str | list[str] | tuple[str], page: int | None = None
     ) -> IucnRedListApiResponse:
         """Assessment data based on a search with optional search criteria.
 
@@ -2505,6 +2508,8 @@ class IucnRedListApiClient:
         params = self._filter_params(
             genus_name=genus_name,
             species_name=species_name,
+            infra_name=infra_name,
+            subpopulation_name=subpopulation_name,
         )
 
         return self.get(endpoint, params=params)
